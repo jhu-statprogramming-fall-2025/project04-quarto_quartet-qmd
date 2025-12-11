@@ -1,0 +1,311 @@
+---
+title: "Page 4 · Text Analysis"
+output:
+  flexdashboard::flex_dashboard:
+    orientation: columns
+    vertical_layout: scroll
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+library(flexdashboard)
+library(shiny)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(scales)
+library(tidytext)
+library(tibble)
+
+# 1) read in preprocessed bigram data
+bigrams_year <- readRDS("words_year_small.rds")
+
+# 2) combine across years
+bigrams_all <- bigrams_year %>%
+  group_by(Source, field, bigram) %>%
+  summarise(n = sum(n), .groups = "drop")
+
+# 3) create field choices: Abstract or Title (or both)
+has_title    <- "Title" %in% bigrams_year$field
+has_abstract <- "Abstract_clean" %in% bigrams_year$field
+
+field_choices <- c()
+if (has_title) {
+  field_choices["Title"]    <- "Title"
+}
+if (has_abstract) {
+  field_choices["Abstract"] <- "Abstract_clean"
+}
+
+# 4) source: NIH, NSF
+source_choices <- sort(unique(bigrams_year$Source))
+
+# 5) year range
+year_min <- min(bigrams_year$Year, na.rm = TRUE)
+year_max <- max(bigrams_year$Year, na.rm = TRUE)
+
+# 6) buzzword catalog
+buzz_catalog <- tribble(
+  ~bigram,               ~set,          ~theme,
+  # 1) Science / mechanism
+  "single cell",         "science",     "mechanism",
+  "cell types",          "science",     "mechanism",
+  "gene expression",     "science",     "mechanism",
+  "stem cells",          "science",     "model",
+  "mouse models",        "science",     "model",
+  "animal models",       "science",     "model",
+  "molecular mechanisms","science",     "mechanism",
+  "immune responses",    "science",     "immune",
+  "breast cancer",       "science",     "disease",
+  "alzheimers disease",  "science",     "disease",
+  "sars cov",            "science",     "disease",
+
+  # 2) Training / infrastructure (NSF-style language)
+  "graduate students",       "training", "students",
+  "graduate student",        "training", "students",
+  "undergraduate students",  "training", "students",
+  "school students",         "training", "students",
+  "synthetic biology",       "training", "discipline",
+  "cellular biosciences",    "training", "discipline",
+  "biological sciences",     "training", "discipline",
+  "effective infrastructure","training", "infrastructure",
+  "data collection",         "training", "data",
+
+  # 3) Narrative / boilerplate / policy
+  "preliminary data",    "narrative", "grant_narrative",
+  "term goal",           "narrative", "grant_narrative",
+  "central hypothesis",  "narrative", "grant_narrative",
+  "broader impacts",     "narrative", "review_criteria",
+  "cutting edge",        "narrative", "hype",
+  "mechanisms underlying","narrative","grant_narrative",
+  "poorly understood",   "narrative", "hype",
+  "real time",           "narrative", "methods",
+  "rescue plan",         "narrative", "policy_program",
+  "american rescue",     "narrative", "policy_program",
+  "wide range",          "narrative", "hype"
+)
+
+# 7) buzzword sets
+buzz_sets <- sort(unique(buzz_catalog$set))
+```
+
+Column {data-width=350}
+# Controls
+```{r}
+# Chooese field
+selectInput(
+  "field", "Text field",
+  choices  = field_choices,
+  selected = if ("Abstract_clean" %in% field_choices) "Abstract_clean" else field_choices[1]
+)
+
+# Choose source
+checkboxGroupInput(
+  "source", "Source",
+  choices  = source_choices,
+  selected = source_choices
+)
+
+# Top bigrams by frequency
+numericInput(
+  "top_n_bigrams",
+  "Top N bigrams (by frequency)",
+  value = 15, min = 5, max = 30, step = 1
+)
+
+# log-ratio bigrams
+numericInput(
+  "top_n_lr",
+  "Top N bigrams in log-ratio (per side)",
+  value = 15, min = 5, max = 30, step = 1
+)
+
+# buzzword set（science / training / narrative）
+radioButtons(
+  "buzz_set",
+  "Buzzword set (bigrams in abstracts)",
+  choices  = c("Science-related"   = "science",
+               "Training / infra" = "training",
+               "Narrative / policy" = "narrative"),
+  selected = "science"
+)
+
+# year range for buzzword trends
+sliderInput(
+  "year_range",
+  "Year range (buzzword trends)",
+  min   = year_min, max = year_max,
+  value = c(year_min, year_max),
+  sep   = ""
+)
+```
+
+# Column {data-width=650}
+## Row 1 · Word-level patterns
+### Top words by source
+```{r}
+renderPlot({
+  req(input$field, input$source)
+
+  df <- bigrams_all %>%
+    filter(
+      field  == input$field,
+      Source %in% input$source
+    ) %>%
+    group_by(Source) %>%
+    mutate(
+      total = sum(n),
+      freq  = n / total
+    ) %>%
+    slice_max(freq, n = input$top_n_bigrams, with_ties = FALSE) %>%
+    ungroup() %>%
+    mutate(bigram = tidytext::reorder_within(bigram, freq, Source))
+
+  validate(
+    need(nrow(df) > 0,
+         "No bigrams after filtering — try changing field / source / Top N.")
+  )
+
+  ggplot(df, aes(x = bigram, y = freq)) +
+    geom_col() +
+    facet_wrap(~ Source, scales = "free_y") +
+    coord_flip() +
+    tidytext::scale_x_reordered() +
+    scale_y_continuous(labels = percent_format(accuracy = 0.01)) +
+    labs(
+      title = paste(
+        "Top", input$top_n_bigrams,
+        "bigrams in", ifelse(input$field == "Abstract_clean", "Abstracts", input$field),
+        "by source (relative frequency)"
+      ),
+      x = NULL,
+      y = "Proportion of bigrams"
+    )
+})
+```
+
+### Signature bigrams: log2(freq_NIH / freq_NSF)
+
+```{r}
+renderPlot({
+  req(input$field)
+
+  eps <- 1e-7
+
+  # 只用 NIH & NSF，同时跨年份合并（bigrams_all）
+  freq <- bigrams_all %>%
+    filter(
+      field  == input$field,
+      Source %in% c("NIH", "NSF")
+    ) %>%
+    group_by(Source) %>%
+    mutate(
+      total = sum(n),
+      freq  = n / total
+    ) %>%
+    ungroup() %>%
+    select(Source, bigram, freq) %>%
+    tidyr::pivot_wider(
+      names_from  = Source,
+      values_from = freq,
+      values_fill = 0
+    )
+
+  # 如果缺少 NIH 或 NSF，就没法算 log-ratio
+  if (!("NIH" %in% names(freq) && "NSF" %in% names(freq))) {
+    validate(need(FALSE, "Need both NIH and NSF to compute log-ratio."))
+  }
+
+  bigram_lr <- freq %>%
+    mutate(
+      log_ratio = log2((NIH + eps) / (NSF + eps)),
+      max_freq  = pmax(NIH, NSF)
+    ) %>%
+    # 丢掉极低频 bigrams
+    filter(max_freq > 1e-6)
+
+  nih_pref <- bigram_lr %>%
+    arrange(desc(log_ratio)) %>%
+    slice_head(n = input$top_n_lr) %>%
+    mutate(pref = "More NIH")
+
+  nsf_pref <- bigram_lr %>%
+    arrange(log_ratio) %>%
+    slice_head(n = input$top_n_lr) %>%
+    mutate(pref = "More NSF")
+
+  plot_dat <- bind_rows(nih_pref, nsf_pref) %>%
+    mutate(bigram = reorder(bigram, log_ratio))
+
+  validate(
+    need(nrow(plot_dat) > 0,
+         "Not enough overlapping bigrams between NIH and NSF to compute log-ratio.")
+  )
+
+  ggplot(plot_dat, aes(x = bigram, y = log_ratio, fill = pref)) +
+    geom_col() +
+    coord_flip() +
+    geom_hline(yintercept = 0, linetype = "dashed") +
+    labs(
+      title = paste0(
+        "Bigrams characteristic of NIH vs NSF (",
+        ifelse(input$field == "Abstract_clean", "Abstracts", input$field),
+        ")"
+      ),
+      x = NULL,
+      y = "log2(freq_NIH / freq_NSF)"
+    )
+})
+```
+
+### Buzzword single in abstracts over time
+```{r}
+renderPlot({
+  req(input$year_range, input$buzz_set)
+
+  # 1) 当前选中的 buzzword bigrams
+  buzz_vec <- buzz_catalog %>%
+    filter(set == input$buzz_set) %>%
+    pull(bigram)
+
+  # 2) 年份范围内，Abstract_clean + 这些 bigrams
+  trend_df <- bigrams_year %>%
+    filter(
+      field == "Abstract_clean",
+      Year >= input$year_range[1],
+      Year <= input$year_range[2],
+      bigram %in% buzz_vec
+    ) %>%
+    group_by(Source, Year) %>%
+    mutate(total = sum(n)) %>%
+    ungroup() %>%
+    mutate(freq = n / total) %>%
+    group_by(bigram) %>%
+    filter(any(freq > 0)) %>%
+    ungroup()
+
+  validate(
+    need(nrow(trend_df) > 0,
+         "No buzzword bigrams in abstracts for this set / year range.")
+  )
+
+  set_label <- dplyr::case_when(
+    input$buzz_set == "science"   ~ "Science-related",
+    input$buzz_set == "training"  ~ "Training / infrastructure",
+    input$buzz_set == "narrative" ~ "Narrative / policy",
+    TRUE ~ input$buzz_set
+  )
+
+  ggplot(trend_df, aes(x = Year, y = freq, color = Source, group = Source)) +
+    geom_line() +
+    geom_point() +
+    facet_wrap(~ bigram, scales = "free_y") +
+    scale_y_continuous(labels = percent_format(accuracy = 0.01)) +
+    scale_x_continuous(breaks = seq(input$year_range[1], input$year_range[2])) +
+    labs(
+      title = paste("Trends of", set_label, "bigrams in abstracts"),
+      x = "Fiscal year",
+      y = "Proportion of all bigrams (within Source × Year × field)"
+    )
+})
+```

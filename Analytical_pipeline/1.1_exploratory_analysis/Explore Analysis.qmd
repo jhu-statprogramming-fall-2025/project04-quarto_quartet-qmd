@@ -1,0 +1,213 @@
+---
+title: "P4 Exploratory Analysis"
+format: html
+editor: visual
+---
+
+## Quarto
+
+```{r}
+merged_data <- readRDS("~/Desktop/merged_data.rds")
+```
+
+# Figure 1. Funding Amount by Year (NIH vs NSF)
+
+```{r, message=FALSE, warning=FALSE, fig.width=10, fig.height=6}
+
+library(lubridate)
+library(dplyr)
+library(ggplot2)
+
+# 1. Summarise total award amount by Fiscal Year and Source
+year_summary <- merged_data %>%
+  group_by(Notification_year, Source) %>%
+  summarise(
+    total_award = sum(Award_amount, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+year_summary_filtered <- year_summary %>%
+  filter(Notification_year != 2020, Notification_year != 2026)
+
+# 3. Faceted plot 
+ggplot(year_summary_filtered,
+       aes(x = Notification_year, y = total_award, color = Source, group = Source)) +
+  geom_line(size = 1.3) +
+  geom_point(size = 3) +
+  geom_text(
+    aes(label = scales::comma(total_award)),
+    vjust = -0.6, size = 3
+  ) +
+  labs(
+    title = "Award Amount Trends Over Time: NIH vs NSF (Year)",
+    x = "Year",
+    y = "Total Award Amount ($)"
+  ) +
+  scale_y_continuous(labels = scales::comma) +
+  facet_wrap(~ Source, scales = "free_y", ncol = 1) +  
+  coord_cartesian(expand = TRUE, clip = "off") +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.margin  = margin(20, 30, 20, 30),
+    legend.position = "none",              
+    strip.text = element_text(size = 13)
+  )
+
+
+```
+
+After a surge in 2022, NIH funding contracted steadily each year, suggesting tightening budgets or shifts in award distributions.
+
+## Table 1. Funding Amount by Notification_year
+
+```{r}
+library(dplyr)
+library(tidyr)
+
+award_amount_table <- merged_data %>%
+  filter(Source %in% c("NIH", "NSF"),
+         Notification_year != 2020,
+         Notification_year != 2026) %>%                 
+  group_by(Notification_year, Source) %>%
+  summarise(total_award_amount = sum(Award_amount, na.rm = TRUE), .groups = "drop") %>%
+  pivot_wider(
+    names_from = Source,
+    values_from = total_award_amount
+  ) %>%
+  mutate(Total = NIH + NSF) %>%
+  arrange(Notification_year)
+
+award_amount_table
+```
+
+# Figure 2. Number of awards by Year (NIH vs NSF)
+
+```{r, message=FALSE, warning=FALSE, fig.width=10, fig.height=6}
+
+library(lubridate)
+library(dplyr)
+library(ggplot2)
+
+# 1. Summarise 
+year_count <- merged_data %>%
+  group_by(Notification_year, Source) %>%
+  summarise(
+    n_awards = n(),
+    .groups = "drop"
+  )
+
+# 2. Remove 2020 and 2026
+year_count_filtered <- year_count %>%
+  filter(Notification_year != 2020, Notification_year != 2026)
+
+# 3. Faceted plot 
+ggplot(year_count_filtered,
+       aes(x = Notification_year, y = n_awards, color = Source, group = Source)) +
+  geom_line(size = 1.3) +
+  geom_point(size = 3) +
+  geom_text(
+    aes(label = scales::comma(n_awards)),
+    vjust = -0.6, size = 3
+  ) +
+  labs(
+    title = "Number of Awards Over Time: NIH vs NSF (Year)",
+    x = "Year",
+    y = "Number of Awards"
+  ) +
+  scale_y_continuous(labels = scales::comma) +
+  facet_wrap(~ Source, scales = "free_y", ncol = 1) +
+  coord_cartesian(expand = TRUE, clip = "off") +
+  theme_minimal(base_size = 14) +
+  theme(
+    plot.margin  = margin(20, 30, 20, 30),
+    legend.position = "none",
+    strip.text = element_text(size = 13)
+  )
+
+```
+
+From 2021 to 2025, the total number of federal research awards (NIH + NSF) decreased substantially, with a sharp decline beginning in 2024 and intensifying in 2025.
+
+## Table 2. Number of awards by Notification_year
+
+```{r}
+
+award_count_table <- merged_data %>%
+  filter(Source %in% c("NIH", "NSF"),
+         Notification_year != 2020,
+         Notification_year != 2026) %>%                 #REMOVE 2020, 2026
+  group_by(Notification_year, Source) %>%
+  summarise(count = n(), .groups = "drop") %>%
+  pivot_wider(
+    names_from = Source,
+    values_from = count
+  ) %>%
+  mutate(Total = NIH + NSF) %>%
+  arrange(Notification_year)
+
+award_count_table
+```
+
+# Table 3. Yearly Funding Amount and Number of Awards Percent Reduction
+
+```{r}
+library(dplyr)
+library(tidyr)
+
+# calculating percentages for the summary_pct table 
+summary_data <- merged_data %>%
+  filter(Source %in% c("NIH", "NSF"),
+         Notification_year >= 2021,
+         Notification_year <= 2025) %>%
+  group_by(Notification_year, Source) %>%
+  summarise(
+    total_amount = sum(Award_amount, na.rm = TRUE),
+    count_awards = n(),
+    .groups = "drop"
+  )
+
+
+summary_total <- summary_data %>%
+  group_by(Notification_year) %>%
+  summarise(
+    total_amount = sum(total_amount),
+    total_awards = sum(count_awards)
+  ) %>%
+  arrange(Notification_year)
+
+
+summary_pct <- summary_total %>%
+  arrange(Notification_year) %>%
+  mutate(
+    pct_change_funding_amount =
+      (total_amount - lag(total_amount)) / lag(total_amount) * 100,
+    
+    pct_change_number_of_awards =
+      (total_awards - lag(total_awards)) / lag(total_awards) * 100
+  )
+
+
+# Finla table 
+summary_pct 
+```
+
+summary_total
+
+## Percent Decrease from 2021 to 2025
+
+```{r}
+pct_2021_2025_funding_amount<- 
+  (summary_total$total_amount[summary_total$Notification_year == 2025] -
+   summary_total$total_amount[summary_total$Notification_year == 2021]) /
+   summary_total$total_amount[summary_total$Notification_year == 2021] * 100
+
+pct_2021_2025_number_of_awards <- 
+  (summary_total$total_awards[summary_total$Notification_year == 2025] -
+   summary_total$total_awards[summary_total$Notification_year == 2021]) /
+   summary_total$total_awards[summary_total$Notification_year == 2021] * 100
+
+pct_2021_2025_funding_amount
+pct_2021_2025_number_of_awards
+```
+
+Funding Amount decreased by −13.7% from 2021 to 2025 Award Count decreased by −34.5% from 2021 to 2025

@@ -1,0 +1,144 @@
+---
+title: "Pilot ML"
+format: html
+---
+
+# Load Libraries
+```{r}
+library(tidyverse)
+library(tidymodels)
+library(here)
+```
+
+# Load data
+```{r}
+merged <- readRDS(here('1_data_cleaning','merged_data.rds'))
+```
+
+# Data Preparation
+
+I want to see if there is a relationship between city, state, and the award amount.
+
+```{r}
+
+data_prep <- merged %>%
+  select(Organization_city, Organization_state, Award_amount) %>%
+  mutate(across(c(Organization_city, Organization_state), as.factor))
+
+
+set.seed(20251204)
+data_split <- initial_split(data_prep, prop = 0.8)
+train_data <- training(data_split)
+test_data <- testing(data_split)
+```
+
+# Model Specification
+```{r}
+rf_spec <- rand_forest(mtry = 2, trees = 500, min_n = 5) %>%
+  set_mode("regression") %>%
+  set_engine("ranger")
+rf_fit <- rf_spec %>%
+  fit(Award_amount ~ ., data = train_data)
+rf_fit
+
+# Model Evaluation
+rf_preds <- predict(rf_fit, test_data) %>%
+  bind_cols(test_data %>% select(Award_amount))
+rf_metrics <- rf_preds %>%
+  metrics(truth = Award_amount, estimate = .pred)
+rf_metrics
+```
+
+# Can you use funding agency and grant type to predict award amount?
+```{r}
+ML.2 <- merged %>%
+  select(Funding_organization, Award_amount, Year) %>%
+  mutate(across(c(Funding_organization, Year), as.factor))
+set.seed(20251204)
+# When doing a split, make sure to stratify based on the organization and years to make sure all organizations and years are represented in both sets
+data_split.2 <- initial_split(ML.2, prop = 0.8, strata = c(Funding_organization, Year))
+train_data.2 <- training(data_split.2)
+test_data.2 <- testing(data_split.2)
+rf_spec.2 <- rand_forest(mtry = 2, trees = 500, min_n = 5) %>%
+  set_mode("regression") %>%
+  set_engine("ranger")
+rf_fit.2 <- rf_spec.2 %>%
+  fit(Award_amount ~ ., data = train_data.2)
+rf_fit.2
+# Model Evaluation
+rf_preds.2 <- predict(rf_fit.2, test_data.2) %>%
+  bind_cols(test_data.2 %>% select(Award_amount))
+rf_metrics.2 <- rf_preds.2 %>%
+  metrics(truth = Award_amount, estimate = .pred)
+rf_metrics.2
+```
+
+Try linear regression
+
+```{r}
+lm_spec <- linear_reg() %>%
+  set_mode("regression") %>%
+  set_engine("lm")
+lm_fit <- lm_spec %>%
+  fit(Award_amount ~ Funding_organization + Year, data = train_data.2)
+lm_fit
+# Model Evaluation
+lm_preds <- predict(lm_fit, test_data.2) %>%
+  bind_cols(test_data.2 %>% select(Award_amount))
+lm_metrics <- lm_preds %>%
+  metrics(truth = Award_amount, estimate = .pred)
+lm_metrics
+
+
+```
+
+Plot top 5 and bottom 5 predictor coefficients
+```{r}
+lm_coefs <- tidy(lm_fit) %>%
+  arrange(desc(abs(estimate))) %>%
+  filter(term != "(Intercept)")
+lm_tops_bottom <- lm_coefs %>%
+  slice_head(n = 5) %>%
+  bind_rows(lm_coefs %>% slice_tail(n = 5))
+lm_tops_bottom %>%
+  ggplot(aes(x = reorder(term, estimate), y = estimate)) +
+  geom_col() +
+  coord_flip() +
+  labs(title = "Top 5 and Bottom 5 Coefficients from Linear Model",
+       x = "Predictor",
+       y = "Coefficient Estimate")
+```
+
+```{r}
+# list the year coefficients specifically
+lm_coefs %>%
+  filter(str_detect(term, "Year"))
+
+```
+
+Plot the distribution of grant amounts by year, log scale, jitter, violin plot
+```{r}
+merged %>%
+  ggplot(aes(x = as.factor(Year), y = Award_amount)) +
+  geom_violin(fill = "lightblue", alpha = 0.5) +
+  geom_jitter(width = 0.2, alpha = 0.3) +
+  scale_y_log10() +
+  labs(title = "Distribution of Grant Amounts by Year",
+       x = "Year",
+       y = "Award Amount (log scale)")
+```
+
+Bar chart for grant counts
+
+```{r}
+merged %>%
+  group_by(Year) %>%
+  summarise(grant_count = n()) %>%
+  ggplot(aes(x = as.factor(Year), y = grant_count)) +
+  geom_bar(stat = "identity", fill = "lightgreen") +
+  labs(title = "Number of Grants Awarded by Year",
+       x = "Year",
+       y = "Number of Grants")
+```
+
+It seems like the award amount does not change much by year, but the number of grants has decreased in 2025 over time.

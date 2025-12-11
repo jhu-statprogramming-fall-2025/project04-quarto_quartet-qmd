@@ -1,0 +1,482 @@
+---
+title: "project4"
+format: html
+editor: visual
+---
+
+## Running Code
+
+```{r}
+# just to look at cleaned nih data 
+data <- readRDS("~/Desktop/nih_data_clean02.rds")
+```
+
+```{r}
+#combine NSF datasets
+library(tidyverse)
+nsf_path <- "~/Desktop/NSF_data"
+
+bcs <- read_csv(file.path(nsf_path, "BCS.csv"))
+mcb <- read_csv(file.path(nsf_path, "MCB.csv"))
+nsf_data <- bind_rows(bcs, mcb)
+
+saveRDS(nsf_data, file.path(nsf_path, "nsf_data.rds"))
+```
+
+```{r}
+#character to numbers
+nsf_data <- nsf_data %>%
+  rename(`Award Number` = AwardNumber) %>%        
+  mutate(`Award Number` = str_replace_all(`Award Number`, "[^0-9]", "")) %>% 
+  mutate(`Award Number` = as.numeric(`Award Number`))
+```
+
+```{r}
+#drop columns
+nsf_data <- nsf_data %>%
+  select(
+    -PIEmailAddress,
+    -OrganizationStreet,
+    -OrganizationZip,
+    -OrganizationPhone,
+    -ARRAAmount
+  )
+
+nsf_data <- nsf_data %>%
+  select(-c(8, 11, 14, 17, 18, 19))
+```
+
+```{r}
+# Rename 
+nsf_data <- nsf_data %>%
+  rename(
+    `Project Title`        = Title,
+    `NSF Organization`     = NSFOrganization,
+    `Budget Start Date`    = StartDate,
+    `Budget End Date`      = EndDate,
+    `Total Cost`           = AwardedAmountToDate,
+    `Award Instrument`     = AwardInstrument,
+    `Award Notice Date`    = LastAmendmentDate,
+    `Organization City`    = OrganizationCity,
+    `Organization State`   = OrganizationState,
+    `Principal Investigator` = PrincipalInvestigator,
+    `Organization Name`    = Organization
+  )
+
+#character to numbers
+nsf_data <- nsf_data %>%
+  mutate(`Total Cost` = as.numeric(str_replace_all(`Total Cost`, "[$,]", "")))
+
+```
+
+```{r}
+library(lubridate)
+
+#correct date format for award notice date 
+nsf_data <- nsf_data %>%
+  mutate(
+    # convert to Date
+    `Award Notice Date` = mdy(`Award Notice Date`),
+    
+    # fiscal year rule
+    FiscalYear = year(`Award Notice Date`) + if_else(month(`Award Notice Date`) >= 10, 1, 0)
+  )
+
+nsf_data <- nsf_data %>%
+  mutate(
+    # Step 1: clean whitespace
+    `Award Notice Date` = trimws(`Award Notice Date`),
+
+    # Step 2: convert character → Date class
+    `Award Notice Date` = as.Date(`Award Notice Date`, format = "%Y-%m-%d"),
+
+    # Step 3: convert Date → formatted character
+    `Award Notice Date` = format(`Award Notice Date`, "%m/%d/%Y")
+  )
+
+#create lumping 
+library(dplyr)
+library(stringdist)
+library(stringr)
+library(tibble)
+
+# 1) Normalize org names once for NSF
+nsf_simple <- nsf_data |>
+  mutate(
+    ORG_NAME_CLEAN = `Organization Name` |>
+      str_to_upper() |>
+      str_replace_all("[[:punct:]]", " ") |>
+      str_squish()
+  )
+
+# 2) Same lumping function
+lump_within_city <- function(df_block, max_dist = 0.2) {
+  orgs <- unique(df_block$ORG_NAME_CLEAN)
+
+  if (length(orgs) == 1L) {
+    return(tibble(
+      ORG_NAME_CLEAN = orgs,
+      LUMPED_ORG = orgs
+    ))
+  }
+
+  dmat <- stringdistmatrix(orgs, orgs, method = "jw", p = 0.1)
+
+  canon_ix <- apply(dmat, 1, function(row) {
+    close <- which(row <= max_dist)
+    close[which.min(nchar(orgs[close]))]
+  })
+
+  tibble(
+    ORG_NAME_CLEAN = orgs,
+    LUMPED_ORG = orgs[canon_ix]
+  )
+}
+
+# 3) Build mapping for NSF
+mapping_city_nsf <- nsf_simple |>
+  group_by(`Organization City`, `Organization State`) |>
+  group_modify(~ lump_within_city(.x)) |>
+  ungroup()
+
+# 4) Join back and rename the new column
+nsf_lumped <- nsf_simple |>
+  left_join(
+    mapping_city_nsf,
+    by = c("Organization City", "Organization State", "ORG_NAME_CLEAN")
+  ) |>
+  rename(`Lumped Organization Names` = LUMPED_ORG)
+
+
+#Drop columns 
+NSF_Cleaned <- nsf_lumped %>%
+  select(
+    -c(4, 16)   # drop Program(s) and ORG_NAME_CLEAN
+  )
+```
+```{r}
+# After Discussion 
+#drop not lumped org name 
+NSF_Cleaned <- NSF_Cleaned[, !names(NSF_Cleaned) %in% "Organization Name"]
+#clean award instrument 
+NSF_Filtered <- NSF_Cleaned[ !NSF_Cleaned$`Award Instrument` %in% 
+                               c("Cooperative Agreement", "Interagency Agreement"), ]
+
+#Rename
+NSF_Cleaned <- NSF_Cleaned |>
+  dplyr::rename(
+    ID                   = `Award Number`,
+    Title                = `Project Title`,
+    Abstract             = `Abstract`,
+    Funding_organization = `NSF Organization`,
+    Start_date           = `Budget Start Date`,
+    End_date             = `Budget End Date`,
+    Notification_date    = `Award Notice Date`,
+    PI                   = `Principal Investigator`,
+    `Activity Category`  = `Award Instrument`,
+    Award_amount         = `Total Cost`,
+    Organization_city    = `Organization City`,
+    Organization_state   = `Organization State`,
+    Organization_name    = `Lumped Organization Names`,
+    Year                 = FiscalYear
+  )
+```
+
+## Additional NSF clena
+```{r}
+NSF_Cleaned$Organization_name[NSF_Cleaned$ID == 2241537] <- "UNIVERSITY OF OKLAHOMA"
+NSF_Cleaned$Activity <- NA
+NSF_Cleaned$ID <- as.character(NSF_Cleaned$ID)
+NSF_Cleaned$Activity <- NA_character_
+```
+
+## Add Source 
+```{r}
+data$Source <- "NIH"
+NSF_Cleaned$Source <- "NSF"
+```
+
+## Reorder cols
+```{r}
+col_order <- c(
+  "ID", "Title", "Abstract", "Funding_organization",
+  "Activity", "Organization_name", "Organization_city",
+  "Organization_state", "Start_date", "End_date",
+  "Year", "Award_amount", "Notification_date", "PI",
+  "Activity Category", "Source"
+)
+
+data        <- data[, col_order]
+NSF_Cleaned <- NSF_Cleaned[, col_order]
+```
+
+## Merge 
+```{r}
+merged_data <- bind_rows(data, NSF_Cleaned)
+
+```
+
+## clean Regents of the and university park
+```{r}
+merged_data$Organization_name <- sub("^REGENTS OF THE\\s+", "", 
+                                     merged_data$Organization_name)
+
+```
+
+
+```{r}
+merged_data$Organization_name[
+  grepl("UNIVERSITY PARK", merged_data$Organization_name, ignore.case = TRUE)
+] <- "PENNSYLVANIA STATE UNIVERSITY"
+
+```
+
+```{r}
+merged_data$Organization_name <- gsub("MAIN CAMPUS", "", 
+                                      merged_data$Organization_name,
+                                      ignore.case = TRUE)
+
+# clean extra spaces created by the removal
+merged_data$Organization_name <- trimws(merged_data$Organization_name)
+
+```
+
+```{r}
+med_terms <- c(
+  "SCHOOL OF MEDICINE",
+  "COLLEGE OF MEDICINE",
+  "MEDICAL SCHOOL",
+  "MEDICAL CENTER",
+  "MEDICAL CAMPUS",
+  "HEALTH SCIENCES",
+  "HEALTH SCIENCE",
+  "HEALTH CENTER"
+)
+
+pattern <- paste(med_terms, collapse = "|")
+```
+
+
+```{r}
+unique(
+  merged_data$Organization_name[
+    grepl(pattern, merged_data$Organization_name, ignore.case = TRUE)
+  ]
+)
+```
+
+## Clean Medical School further 
+```{r}
+merged_data$Organization_name[
+  merged_data$Organization_name == "HARVARD MEDICAL SCHOOL"
+] <- "HARVARD UNIVERSITY"
+```
+
+```{r}
+# 1. NEW YORK UNIVERSITY D/B/A NYU LONG ISLAND SCHOOL OF MEDICINE → NEW YORK UNIVERSITY
+merged_data$Organization_name[
+  merged_data$Organization_name == "NEW YORK UNIVERSITY D/B/A NYU LONG ISLAND SCHOOL OF MEDICINE"
+] <- "NEW YORK UNIVERSITY"
+
+# 2. COLUMBIA UNIVERSITY HEALTH SCIENCES → COLUMBIA UNIVERSITY
+merged_data$Organization_name[
+  merged_data$Organization_name == "COLUMBIA UNIVERSITY HEALTH SCIENCES"
+] <- "COLUMBIA UNIVERSITY"
+
+# 3. UNIVERSITY OF MIAMI SCHOOL OF MEDICINE → UNIVERSITY OF MIAMI
+merged_data$Organization_name[
+  merged_data$Organization_name == "UNIVERSITY OF MIAMI SCHOOL OF MEDICINE"
+] <- "UNIVERSITY OF MIAMI"
+
+# 4. NEW YORK UNIVERSITY SCHOOL OF MEDICINE → NEW YORK UNIVERSITY
+merged_data$Organization_name[
+  merged_data$Organization_name == "NEW YORK UNIVERSITY SCHOOL OF MEDICINE"
+] <- "NEW YORK UNIVERSITY"
+
+# 5. UNIVERSITY OF KANSAS MEDICAL CENTER → UNIVERSITY OF KANSAS
+merged_data$Organization_name[
+  merged_data$Organization_name == "UNIVERSITY OF KANSAS MEDICAL CENTER"
+] <- "UNIVERSITY OF KANSAS"
+
+# 6. VANDERBILT UNIVERSITY MEDICAL CENTER → VANDERBILT UNIVERSITY
+merged_data$Organization_name[
+  merged_data$Organization_name == "VANDERBILT UNIVERSITY MEDICAL CENTER"
+] <- "VANDERBILT UNIVERSITY"
+
+# 7. UNIVERSITY OF NEBRASKA MEDICAL CENTER → UNIVERSITY OF NEBRASKA
+merged_data$Organization_name[
+  merged_data$Organization_name == "UNIVERSITY OF NEBRASKA MEDICAL CENTER"
+] <- "UNIVERSITY OF NEBRASKA"
+
+# 8. BOSTON UNIVERSITY MEDICAL CAMPUS → BOSTON UNIVERSITY
+merged_data$Organization_name[
+  merged_data$Organization_name == "BOSTON UNIVERSITY MEDICAL CAMPUS"
+] <- "BOSTON UNIVERSITY"
+
+# 9. WAKE FOREST UNIVERSITY HEALTH SCIENCES → WAKE FOREST UNIVERSITY
+merged_data$Organization_name[
+  merged_data$Organization_name == "WAKE FOREST UNIVERSITY HEALTH SCIENCES"
+] <- "WAKE FOREST UNIVERSITY"
+
+#10. TEXAS A&M UNIVERSITY HEALTH SCIENCE CTR → TEXAS A&M UNIVERSITY
+merged_data$Organization_name[
+  merged_data$Organization_name == "TEXAS A&M UNIVERSITY HEALTH SCIENCE CTR"
+] <- "TEXAS A&M UNIVERSITY"
+
+#11. RUSH UNIVERSITY MEDICAL CENTER → RUSH UNIVERSITY
+merged_data$Organization_name[
+  merged_data$Organization_name == "RUSH UNIVERSITY MEDICAL CENTER"
+] <- "RUSH UNIVERSITY"
+
+#12. WESTERN MICHIGAN UNIV SCHOOL OF MEDICINE → WESTERN MICHIGAN UNIV
+merged_data$Organization_name[
+  merged_data$Organization_name == "WESTERN MICHIGAN UNIV SCHOOL OF MEDICINE"
+] <- "WESTERN MICHIGAN UNIV"
+
+#13. TEXAS TECH UNIVERSITY HEALTH SCIENCES CENTER AT EL PASO → TEXAS TECH UNIVERSITY
+merged_data$Organization_name[
+  merged_data$Organization_name == "TEXAS TECH UNIVERSITY HEALTH SCIENCES CENTER AT EL PASO"
+] <- "TEXAS TECH UNIVERSITY"
+
+#14. UNIVERSITY OF NORTH TEXAS HEALTH SCIENCE CENTER AT FORT WORTH → UNIVERSITY OF NORTH TEXAS
+merged_data$Organization_name[
+  merged_data$Organization_name == "UNIVERSITY OF NORTH TEXAS HEALTH SCIENCE CENTER AT FORT WORTH"
+] <- "UNIVERSITY OF NORTH TEXAS"
+
+#15. UNIVERSITY OF TEXAS SOUTHWESTERN MEDICAL CENTER → UNIVERSITY OF TEXAS SOUTHWESTERN
+merged_data$Organization_name[
+  merged_data$Organization_name == "UNIVERSITY OF TEXAS SOUTHWESTERN MEDICAL CENTER"
+] <- "UT SOUTHWESTERN"
+
+#16. UNIVERSITY OF MASSACHUSETTS MEDICAL SCHOOL → UNIVERSITY OF MASSACHUSETTS
+merged_data$Organization_name[
+  merged_data$Organization_name == "UNIVERSITY OF MASSACHUSETTS MEDICAL SCHOOL"
+] <- "UNIVERSITY OF MASSACHUSETTS"
+
+#17. THE UNIVERSITY OF TEXAS HEALTH SCIENCE CENTER AT HOUSTON → THE UNIVERSITY OF TEXAS
+merged_data$Organization_name[
+  merged_data$Organization_name == "THE UNIVERSITY OF TEXAS HEALTH SCIENCE CENTER AT HOUSTON"
+] <- "THE UNIVERSITY OF TEXAS"
+
+```
+
+```{r}
+merged_data$Organization_name <- sub("^THE\\s+", "", merged_data$Organization_name)
+
+```
+
+```{r}
+unique(
+  merged_data$Organization_name[
+    grepl("^UNIVERSITY OF TEXAS", merged_data$Organization_name, ignore.case = TRUE)
+  ]
+)
+
+```
+
+
+```{r}
+merged_data$Organization_name[
+  grepl("HLTH", merged_data$Organization_name, ignore.case = TRUE)
+] <- "UNIVERSITY OF TEXAS"
+
+```
+
+```{r}
+merged_data$Organization_name[
+  merged_data$Organization_name == "UNIVERSITY OF TX MD ANDERSON CAN CTR H"
+] <- "UNIVERSITY OF TEXAS MD ANDERSON CAN CTR H"
+
+```
+
+
+
+```{r}
+# 1. Fix "AT DAVIS" to "DAVIS"
+merged_data$Organization_name[
+  merged_data$Organization_name == "UNIVERSITY OF CALIFORNIA AT DAVIS"
+] <- "UNIVERSITY OF CALIFORNIA DAVIS"
+
+# 2. Remove commas after "UNIVERSITY OF CALIFORNIA,"
+merged_data$Organization_name <- gsub(
+  "^UNIVERSITY OF CALIFORNIA,\\s*", 
+  "UNIVERSITY OF CALIFORNIA ", 
+  merged_data$Organization_name
+)
+
+# 3. Replace hyphens with spaces for UC campuses
+merged_data$Organization_name <- gsub(
+  "^UNIVERSITY OF CALIFORNIA-",
+  "UNIVERSITY OF CALIFORNIA ",
+  merged_data$Organization_name
+)
+
+# 4. Also fix any that have commas before the campus name
+merged_data$Organization_name <- gsub(
+  "UNIVERSITY OF CALIFORNIA,\\s*",
+  "UNIVERSITY OF CALIFORNIA ",
+  merged_data$Organization_name
+)
+
+# 5. Trim extra whitespace (important)
+merged_data$Organization_name <- trimws(merged_data$Organization_name)
+
+```
+
+```{r}
+unique(
+  merged_data$Organization_name[
+    grepl("UNIVERSITY OF CALIFORNIA", merged_data$Organization_name, ignore.case = TRUE)
+  ]
+)
+```
+
+```{r}
+unique(
+  merged_data$Organization_name[
+    grepl("\\bUNIV\\b", merged_data$Organization_name, ignore.case = TRUE)
+  ]
+)
+
+```
+
+```{r}
+merged_data$Organization_name[
+  merged_data$Organization_name == "UNIVERSITY OF MICHIGAN AT ANN ARBOR"
+] <- "UNIVERSITY OF MICHIGAN ANN ARBOR"
+
+merged_data$Organization_name[
+  merged_data$Organization_name == "NORTHWESTERN UNIVERSITY AT CHICAGO"
+] <- "NORTHWESTERN UNIVERSITY"
+
+```
+
+
+```{r}
+merged_data$Organization_name[
+  merged_data$Organization_name == "HARVARD UNIVERSITY D/B/A HARVARD SCHOOL OF PUBLIC HEALTH"
+] <- "HARVARD UNIVERSITY"
+```
+
+
+```{r}
+merged_data$Organization_name[
+  merged_data$Organization_name == "CUNY GRADUATE SCH AND UNIV CTR"
+] <- "CUNY"
+
+merged_data$Organization_name[
+  merged_data$Organization_name == "GRADUATE SCHOOL OF PUBLIC HEALTH AND HEALTH POLICY"
+] <- "CUNY"
+
+```
+
+```{r}
+merged_data$Organization_name[
+  merged_data$Organization_name == "COLUMBIA UNIV NEW YORK MORNINGSIDE"
+] <- "COLUMBIA UNIVERSITY"
+
+```
+
+
+
+

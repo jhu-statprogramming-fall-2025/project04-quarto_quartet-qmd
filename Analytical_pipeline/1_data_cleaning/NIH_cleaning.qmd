@@ -1,0 +1,261 @@
+---
+title: "Cleaning NIH data "
+format: html
+---
+
+```{r}
+library(tidyverse)
+library(here)
+```
+
+```{r}
+# load all the files under raw_data/NIH_Search folder
+nih_files <- list.files(here("raw_data/NIH_Search"), full.names = TRUE)
+# Skip the first 12 rows which are metadata, and use 13th row as header
+nih_data <- nih_files %>%
+  map_dfr(~ read_csv(.x, skip = 12))
+# save the combined data in RDS format for future use
+saveRDS(nih_data, here("1_data_cleaning/nih_data_raw.rds"))
+
+```
+
+## Load the raw data
+```{r}
+nih_data <- readRDS(here("1_data_cleaning/nih_data_raw.rds"))
+
+```
+
+```{r}
+# filter data for only the columns we need
+# first print the column names to identify which ones to keep
+colnames(nih_data)
+# make a vector of columns to keep
+cols_to_keep <- 
+    c("Project Number", 
+    "Project Title",
+    "Project Abstract", "Administering IC","Type","Activity",
+    "Organization Name", "Organization City", "Organization State", "Budget Start Date","Budget End Date","Fiscal Year","Total Cost","Award Notice Date","Contact PI / Project Leader")
+nih_data_clean <- nih_data %>%
+  select(all_of(cols_to_keep))
+
+# add a wrangled column of "Activity category" by slicing "Activity" to take the first alphabets before any numbers
+nih_data_clean <- nih_data_clean %>%
+  mutate(`Activity Category` = str_extract(`Activity`, "^[A-Za-z]+"))
+```
+
+```{r}
+# filter out grant with Type not equal to "1", "2"
+nih_data_clean <- nih_data_clean %>%
+  filter(`Type` %in% c("1", "2")) %>%
+  select(-Type)
+```
+
+```{r}
+dim(nih_data_clean)
+# currently there are 83674 grants
+# first remove any rows with NA in any part of the table
+nih_data_clean <- nih_data_clean %>%
+  drop_na()
+# currently there are 80718 grants
+
+# we want to keep only the newest awards, which can be done by slicing the Project number by the hyphen, and keeping only the first part, and then filtering for the max fiscal year for each project number
+nih_data_dedup <- nih_data_clean %>%
+  mutate(`Project Number Base` = str_extract(`Project Number`, "^[^-]+")) %>%
+  group_by(`Project Number Base`) %>%
+  filter(`Fiscal Year` == max(`Fiscal Year`)) %>%
+  ungroup() %>%
+  select(-`Project Number Base`)
+dim(nih_data_dedup)
+# after cleaning, there are 186283 grants
+```
+
+
+```{r}
+# some basic exploratory plots
+nih_data_clean %>%
+  ggplot(aes(x = `Fiscal Year`)) +
+  geom_bar() +
+  labs(title = "Number of NIH grants by Fiscal Year",
+       x = "Fiscal Year",
+       y = "Number of Grants")
+
+# Group by total amount of funding
+nih_data_clean %>%
+  group_by(`Fiscal Year`) %>%
+  summarise(Total_Funding = sum(`Total Cost`, na.rm = TRUE)) %>%
+  ggplot(aes(x = `Fiscal Year`, y = Total_Funding)) +
+  geom_line() +
+  geom_point() +
+  labs(title = "Total NIH Funding by Fiscal Year",
+       x = "Fiscal Year",
+       y = "Total Funding (USD)")
+
+# Group by institution, top 10 institutions by total funding
+nih_data_clean %>%
+  group_by(`Organization Name`) %>%
+  summarise(Total_Funding = sum(`Total Cost`, na.rm = TRUE)) %>%
+  arrange(desc(Total_Funding)) %>%
+  slice_head(n = 10) %>%
+  ggplot(aes(x = reorder(`Organization Name`, Total_Funding), y = Total_Funding)) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  labs(title = "Top 10 Institutions by Total NIH Funding",
+       x = "Institution",
+       y = "Total Funding (USD)")
+
+# top 10 cities by total funding
+nih_data_clean %>%
+  group_by(`Organization City`) %>%
+  summarise(Total_Funding = sum(`Total Cost`, na.rm = TRUE)) %>%
+  arrange(desc(Total_Funding)) %>%
+  slice_head(n = 10) %>%
+  ggplot(aes(x = reorder(`Organization City`, Total_Funding), y = Total_Funding)) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  labs(title = "Top 10 Cities by Total NIH Funding",
+       x = "City",
+       y = "Total Funding (USD)")
+
+# top 10 institutions by fiscal year
+nih_data_clean %>%
+  group_by(`Fiscal Year`, `Organization Name`) %>%
+  summarise(Total_Funding = sum(`Total Cost`, na.rm = TRUE)) %>%
+  arrange(`Fiscal Year`, desc(Total_Funding)) %>%
+  group_by(`Fiscal Year`) %>%
+  slice_head(n = 10) %>%
+  ungroup() %>%
+  ggplot(aes(x = reorder(`Organization Name`, Total_Funding), y = Total_Funding, fill = as.factor(`Fiscal Year`))) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  labs(title = "Top 10 Institutions by Total NIH Funding per Fiscal Year",
+       x = "Institution",
+       y = "Total Funding (USD)",
+       fill = "Fiscal Year")
+
+```
+
+### Rename the columns for consistent nomenclature
+```{r}
+nih_data_clean <- nih_data_clean %>%
+  rename(
+    `ID`        = `Project Number`,
+    `Title`         = `Project Title`,
+    `Abstract`      = `Project Abstract`,
+    `Funding organization`   = `Administering IC`,
+    `Start_date`    = `Budget Start Date`,
+    `End_date`      = `Budget End Date`,
+    `Principal Investigator` = `Contact PI / Project Leader`,
+    `Total Cost`   = `Total Cost`,
+    `Notification_date` = `Award Notice Date`,
+    `Award_amount` = `Total Cost`,
+    `Year` = `Fiscal Year`,
+    `Organization_name` = `Organization Name`,
+    `Organization_city` = `Organization City`,
+    `Organization_state` = `Organization State`
+  )
+
+```
+
+## Pilot trial for lumping organization names
+
+```{r}
+library(dplyr)
+library(stringdist)
+library(stringr)
+
+# 1) Normalize org names once
+nih_simple <- nih_data_clean |>
+  mutate(
+    ORG_NAME_CLEAN = `Organization Name` |>
+      str_to_upper() |>
+      str_replace_all("[[:punct:]]", " ") |>
+      str_squish()
+  )
+
+# 2) Function: within one CITY (+ STATE) block, map each clean name to a canonical name
+lump_within_city <- function(df_block, max_dist = 0.2) {
+  orgs <- unique(df_block$ORG_NAME_CLEAN)
+
+  if (length(orgs) == 1L) {
+    return(tibble(
+      ORG_NAME_CLEAN = orgs,
+      LUMPED_ORG = orgs
+    ))
+  }
+
+  dmat <- stringdistmatrix(orgs, orgs, method = "jw", p = 0.1)
+
+  # for each org, choose the shortest close neighbor (including itself) as canonical
+  canon_ix <- apply(dmat, 1, function(row) {
+    close <- which(row <= max_dist)
+    close[which.min(nchar(orgs[close]))]
+  })
+
+  tibble(
+    ORG_NAME_CLEAN = orgs,
+    LUMPED_ORG = orgs[canon_ix]
+  )
+}
+
+# 3) Apply within each CITY–STATE and build mapping
+mapping_city <- nih_simple |>
+  group_by(`Organization City`, `Organization State`) |>
+  group_modify(~ lump_within_city(.x)) |>
+  ungroup()
+
+# 4) Join mapping back to all rows
+nih_lumped <- nih_simple |>
+  left_join(
+    mapping_city,
+    by = c('Organization City', 'Organization State', "ORG_NAME_CLEAN")
+  )
+```
+
+```{r}
+# calculate table for total funding by LUMPED_ORG and Fiscal Year
+nih_lumped_summary <- nih_lumped %>%
+  group_by(LUMPED_ORG, `Fiscal Year`) %>%
+  summarise(Total_Funding = sum(`Total Cost`, na.rm = TRUE)) %>%
+  ungroup()
+# calculate table for total funding by original Organization Name and Fiscal Year
+nih_original_summary <- nih_lumped %>%
+  group_by(`Organization Name`, `Fiscal Year`) %>%
+  summarise(Total_Funding = sum(`Total Cost`, na.rm = TRUE)) %>%
+  ungroup()
+
+# plot top 10 LUMPED_ORG by total funding
+nih_lumped_summary %>%
+  group_by(LUMPED_ORG) %>%
+  summarise(Total_Funding = sum(Total_Funding, na.rm = TRUE)) %>%
+  arrange(desc(Total_Funding)) %>%
+  slice_head(n = 10) %>%
+  ggplot(aes(x = reorder(LUMPED_ORG, Total_Funding), y = Total_Funding)) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  labs(title = "Top 10 LUMPED Institutions by Total NIH Funding",
+       x = "LUMPED Institution",
+       y = "Total Funding (USD)")
+
+# plot top 10 original Organization Name by total funding
+nih_original_summary %>%
+  group_by(`Organization Name`) %>%
+  summarise(Total_Funding = sum(Total_Funding, na.rm = TRUE)) %>%
+  arrange(desc(Total_Funding)) %>%
+  slice_head(n = 10) %>%
+  ggplot(aes(x = reorder(`Organization Name`, Total_Funding), y = Total_Funding)) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  labs(title = "Top 10 Original Institutions by Total NIH Funding",
+       x = "Original Institution",
+       y = "Total Funding (USD)")
+
+       
+```
+
+```{r}
+# save the cleaned and lumped data
+saveRDS(nih_lumped, here("1_data_cleaning/nih_data_lumped.rds"))
+saveRDS(nih_data_clean, here("1_data_cleaning/nih_data_clean.rds"))
+saveRDS(nih_data_dedup, here("1_data_cleaning/nih_data_dedup.rds"))
+
+```

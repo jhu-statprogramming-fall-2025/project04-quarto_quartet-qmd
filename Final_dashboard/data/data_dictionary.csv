@@ -1,0 +1,23 @@
+Composite_Variable_Name,Variable_Type,Source,Variable,Description,Values
+ID,KEY (string),NIH,Project Number,Full NIH project number used as a unique identifier linking to publications and patents.,Example: 1K23HL167650-01A1
+ID,KEY (string),NSF,Award number,7-digit unique identifier of award record in NSF database.,Example: 2045678
+Title,TEXT,NIH,Project Title,"Title of the funded grant, contract, or intramural project.",NA
+Title,TEXT,NSF,Title,Title of the funded grant or project.,NA
+Abstract,TEXT,NIH,Project Abstract,Statement articulating a project’s potential to improve public health.,NA
+Abstract,TEXT,NSF,Abstract,"Statement detailing the project’s background, scientific relevance, and impact.",NA
+Funding_organization,CATEGORICAL,NIH,Administering IC,Acronym for the NIH Institute or Center(s) providing funding.,"e.g., NCI, NIAID, NHLBI, NIMH, NIGMS, etc."
+Funding_organization,CATEGORICAL,NSF,NSF Organization,Acronym for the NSF directorate or office providing funding.,"e.g., BCS, MCB, etc."
+Activity,CATEGORICAL,NIH,Activity,3-character code identifying the grant or contract activity.,"e.g., R01, K08, U01"
+Activity_category,CATEGORICAL,NIH,Activity category,1-character code identifying the category of the grant or project.,"e.g., R = research project, K = career development, U = cooperative agreement"
+Organization_name,TEXT,Both,Organization Name,"Name of the institution, research organization, business, or agency receiving funding.",NA
+Organization_city,LOCATION,Both,Organization City,City of the business office of the grantee organization or contractor.,NA
+Organization_state,LOCATION,Both,Organization State,2-character abbreviation for the state of the grantee organization or contractor.,"e.g., CA, MD, NY"
+Start_date,DATE,Both,Start Date,"Start date of a project; for multi-project grants, the start date of the parent award.",After 01/01/2021
+End_date,DATE,Both,End Date,"End date of a project; for multi-project grants, the end date of the parent award.",NA
+Year,YEAR,Both,Fiscal Year,Fiscal year from which project funds were obligated (2021–2026).,2021–2026
+Notification_date,DATE,NIH,Award Notice Date,Date of NIH award notice or Notice of Grant Award.,After 01/01/2021
+Notification_date,DATE,NSF,Last Amendment Date,Date of last application amendment (used as surrogate for award notice date).,After 01/01/2021
+Award_amount,NUMERICAL,NIH,Total Cost,Total project funding from all NIH Institutes and Centers for a given fiscal year.,In USD ($)
+Award_amount,NUMERICAL,NSF,Awarded amount,Total funding awarded to date for the NSF project.,In USD ($)
+Notification_year,YEAR,NIH,Fiscal Year,Fiscal year in which the project's award funds were officially notified to the recipient organization(2020–2025).,2020–2025
+Notification_year,YEAR,NSF,Fiscal Year,Fiscal year in which the project's award funds were officially notified to the recipient organization(2020–2025).,2020–2025

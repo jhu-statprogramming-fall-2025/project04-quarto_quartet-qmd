@@ -1,0 +1,2161 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.25">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Quarto_quartet.qmd">
+
+<title>Show Me the Money! A Roadmap to Biomedical Grants</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="Show_me_the_money_files/libs/clipboard/clipboard.min.js"></script>
+<script src="Show_me_the_money_files/libs/quarto-html/quarto.js" type="module"></script>
+<script src="Show_me_the_money_files/libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="Show_me_the_money_files/libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="Show_me_the_money_files/libs/quarto-html/popper.min.js"></script>
+<script src="Show_me_the_money_files/libs/quarto-html/tippy.umd.min.js"></script>
+<script src="Show_me_the_money_files/libs/quarto-html/anchor.min.js"></script>
+<link href="Show_me_the_money_files/libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="Show_me_the_money_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="Show_me_the_money_files/libs/quarto-html/quarto-syntax-highlighting-dark-707d8167ce6003fca903bfe2be84ab7f.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="Show_me_the_money_files/libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="Show_me_the_money_files/libs/bootstrap/bootstrap.min.js"></script>
+<link href="Show_me_the_money_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="Show_me_the_money_files/libs/bootstrap/bootstrap-78b5adbbc375d7e18de0e8bd95e59b2b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="Show_me_the_money_files/libs/bootstrap/bootstrap-dark-78b5adbbc375d7e18de0e8bd95e59b2b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<link href="Show_me_the_money_files/libs/bootstrap/bootstrap-78b5adbbc375d7e18de0e8bd95e59b2b.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script src="Show_me_the_money_files/libs/quarto-dashboard/quarto-dashboard.js"></script>
+<script src="Show_me_the_money_files/libs/quarto-dashboard/stickythead.js"></script>
+
+
+
+<script src="Show_me_the_money_files/libs/quarto-dashboard/web-components.js" type="module"></script>
+<script src="Show_me_the_money_files/libs/quarto-dashboard/components.js"></script>
+
+
+
+</head>
+
+<body class="quarto-dashboard dashboard-sidebar fullcontent quarto-light">
+
+<header id="quarto-dashboard-header">
+<nav class="navbar navbar-expand-md slim" data-bs-theme="dark">
+  <div class="navbar-container container-fluid">
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#dashboard-collapse" aria-controls="dashboard-collapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>    
+
+
+    <div class="navbar-brand-container">
+
+
+      <div class="navbar-title">
+        <div class="navbar-title-text"><a href="#">Show Me the Money! A Roadmap to Biomedical Grants</a></div>
+        
+        <div class="navbar-author">Quarto_quartet.qmd</div>
+      </div>
+    </div>
+<div id="dashboard-collapse" class="navbar-collapse collapse"><ul class="navbar-nav navbar-nav-scroll me-auto" role="tablist"><li class="nav-item" role="presentation"><a id="tab-introduction" class="nav-link active" data-bs-toggle="tab" role="tab" data-bs-target="#introduction" data-scrolling="true" href="#introduction" aria-controls="introduction" aria-selected="true"><span class="nav-link-text">Introduction</span></a></li><li class="nav-item" role="presentation"><a id="tab-funding-breakdown" class="nav-link" data-bs-toggle="tab" role="tab" data-bs-target="#funding-breakdown" data-scrolling="true" href="#funding-breakdown" aria-controls="funding-breakdown" aria-selected="false"><span class="nav-link-text">Funding breakdown</span></a></li><li class="nav-item" role="presentation"><a id="tab-interactive-heatmap" class="nav-link" data-bs-toggle="tab" role="tab" data-bs-target="#interactive-heatmap" data-scrolling="true" href="#interactive-heatmap" aria-controls="interactive-heatmap" aria-selected="false"><span class="nav-link-text">Interactive heatmap</span></a></li><li class="nav-item" role="presentation"><a id="tab-text-analysis" class="nav-link" data-bs-toggle="tab" role="tab" data-bs-target="#text-analysis" data-scrolling="true" href="#text-analysis" aria-controls="text-analysis" aria-selected="false"><span class="nav-link-text">Text Analysis</span></a></li></ul></div></div>
+</nav>
+</header>
+<div class="page-layout-custom quarto-dashboard-content bslib-gap-spacing html-fill-container dashboard-scrolling quarto-dashboard-pages">  
+
+<div class="cell bslib-grid-item html-fill-item">
+<style type="text/css">
+/* 1. Main Container for the Right Side */
+.vertical-stack-container {
+display: flex;
+flex-direction: column; /* Stack items Top-to-Bottom */
+gap: 20px; /* Space between Top and Bottom card */
+height: 95vh; /* Use full viewport height */
+padding-bottom: 20px;
+}
+
+/* 2. Individual Card Styling */
+.heatmap-card {
+background-color: #ffffff;
+border: 1px solid #e3e3e3;
+border-radius: 8px;
+box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+padding: 15px;
+
+/* Flex settings: Grow to fill 50% of height each */
+flex: 1;
+display: flex; /* Flex inside the card to organize Title vs Plot */
+flex-direction: column;
+min-height: 0; /* Crucial for scrolling inside flex items if needed */
+}
+
+/* 3. Header Styling */
+.heatmap-card h4 {
+margin-top: 0;
+margin-bottom: 10px;
+font-weight: 600;
+color: #444;
+border-bottom: 2px solid #f0f0f0;
+padding-bottom: 5px;
+flex-shrink: 0; /* Keep header strictly sizing to content */
+}
+
+/* 4. Ensure Girafe fills the remaining card space */
+.girafe-container {
+flex-grow: 1;
+height: 100%; 
+width: 100%;
+position: relative;
+}
+.girafe_container_std {
+width: 100%;
+height: 100%;
+}
+
+</style>
+</div>
+<div class="bslib-grid-item html-fill-item tab-content bslib-grid" data-layout="flow" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div id="introduction" class="dashboard-page tab-pane show active html-fill-item html-fill-container" data-orientation="rows" aria-labelledby="tab-introduction">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: 300px minmax(3em, 1fr) 200px minmax(3em, 1fr) minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card html-fill-item html-fill-container bslib-card" data-title="Show Me the Money! A Roadmap to Biomedical Grants" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-header"><div class="card-title"><span style="display: inline">
+Show Me the Money! A Roadmap to Biomedical Grants
+</span></div></div>
+<div class="card-body html-fill-item html-fill-container">
+<p>In a period marked by tightening research budgets, this dashboard combines data from both the NIH and NSF to provide a snapshot of the biomedical funding landscape from 2021 to 2025.</p>
+<p>The dashboard features an interactive map that allows users to examine funding patterns by state, as well as plots by agency and grant type. Additional text analysis highlights emerging research topics and keywords, helping users identify areas of growing scientific interest.</p>
+<p>This platform is designed for students, junior faculty, and researchers who want easy access to aggregated funding data from major federal agencies. Our goal is to provide a practical, accessible resource for navigating the biomedical grants landscape.</p>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+<div class="card tabset html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-header dashboard-card-no-title bslib-navs-card-title">
+
+<ul class="nav nav-tabs card-header-tabs" role="tablist" data-tabsetid="card-tabset-2"><li class="nav-item" role="presentation"><a href="#card-tabset-2-1" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="Award Amount" aria-selected="true" class="nav-link active">Award Amount</a></li><li class="nav-item" role="presentation"><a href="#card-tabset-2-2" role="tab" data-toggle="tab" data-bs-toggle="tab" data-value="Number of Awards" aria-selected="false" class="nav-link">Number of Awards</a></li></ul></div>
+
+
+<div class="tab-content html-fill-item html-fill-container" data-tabset-id="card-tabset-2"><div class="tab-pane active show html-fill-item html-fill-container" role="tabpanel" id="card-tabset-2-1"><div class="card-body html-fill-item html-fill-container" data-title="Award Amount">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-title="Award Amount" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-header"><div class="card-title"><span style="display: inline">
+Award Amount
+</span></div></div>
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="shiny-plot-output html-fill-item html-fill-container" id="intro_amount_plot" style="width:100%;height:450px;"></div>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div><div class="tab-pane html-fill-item html-fill-container" role="tabpanel" id="card-tabset-2-2"><div class="card-body html-fill-item html-fill-container" data-title="Number of Awards">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-title="Number of Awards" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-header"><div class="card-title"><span style="display: inline">
+Number of Awards
+</span></div></div>
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="shiny-plot-output html-fill-item html-fill-container" id="intro_count_plot" style="width:100%;height:450px;"></div>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div></div></div><bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card html-fill-item html-fill-container bslib-card" data-title="Funding Data Summary" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-header"><div class="card-title"><span style="display: inline">
+Funding Data Summary
+</span></div></div>
+<div class="card-body html-fill-item html-fill-container">
+<p>This dataset compiles all NIH and NSF award records from 2021 through December 1, 2025. It includes key information such as project titles, funding amounts, award dates, and participating institutions. For transparency and reproducibility, our raw data and scripts are available in our project’s GitHub repository. GitHub Repository: <a href="https://github.com/lindaye-md/jhu-biostat777-project-4.git">View Project Repository</a></p>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-title="Funding Data Preview" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-header"><div class="card-title"><span style="display: inline">
+Funding Data Preview
+</span></div></div>
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="datatables html-widget html-widget-output shiny-report-size html-fill-item html-fill-container" id="data_preview" style="width:100%;height:auto;"></div>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-title="Data Dictionary" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-header"><div class="card-title"><span style="display: inline">
+Data Dictionary
+</span></div></div>
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="datatables html-widget html-widget-output shiny-report-size html-fill-item html-fill-container" id="data_dictionary" style="width:100%;height:auto;"></div>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div>
+</div>
+<div id="funding-breakdown" class="dashboard-page tab-pane grid-skip html-fill-item html-fill-container" data-orientation="columns" aria-labelledby="tab-funding-breakdown">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 20fr) minmax(3em, 80fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, max-content); grid-auto-columns: minmax(0, 1fr);">
+<div class="card html-fill-item html-fill-container bslib-card" data-fill="false" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<p><strong>2025 Statistics</strong></p>
+<div class="card bslib-card bslib-mb-spacing html-fill-container bslib-value-box showcase-left-center html-fill-item" data-bslib-card-init="" data-require-bs-caller="card()" data-require-bs-version="5 5" style="color:#FFFFFF;background-color:#D15030;--bslib-color-fg:#FFFFFF;--bslib-color-bg:#D15030;" data-full-screen="false">
+<div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto; padding:0;">
+<div class="value-box-grid html-fill-item" style="--bslib-grid-height:auto;--bslib-grid-height-mobile:auto;---bslib-value-box-showcase-w:30%;---bslib-value-box-showcase-w-fs:1fr;---bslib-value-box-showcase-max-h:100px;---bslib-value-box-showcase-max-h-fs:67%;">
+<div class="value-box-showcase html-fill-item html-fill-container"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" class="bi bi-graph-down-arrow " style="height:30px;width:30px;fill:currentColor;vertical-align:-0.125em;style:margin: 0;;" aria-hidden="true" role="img"><path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm10 11.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-1 0v2.6l-3.613-4.417a.5.5 0 0 0-.74-.037L7.06 8.233 3.404 3.206a.5.5 0 0 0-.808.588l4 5.5a.5.5 0 0 0 .758.06l2.609-2.61L13.445 11H10.5a.5.5 0 0 0-.5.5Z"></path></svg></div>
+<div class="value-box-area html-fill-item html-fill-container">
+<p style="font-size: 12px;" class="value-box-title">Change in Funding $ Since 2021</p>
+<p style="font-size: 16px;" class="value-box-value">-13.7%</p>
+</div>
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+<div class="card bslib-card bslib-mb-spacing html-fill-container bslib-value-box showcase-left-center html-fill-item" data-bslib-card-init="" data-require-bs-caller="card()" data-require-bs-version="5 5" style="color:#FFFFFF;background-color:#840e0eff;--bslib-color-fg:#FFFFFF;--bslib-color-bg:#840e0eff;" data-full-screen="false">
+<div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto; padding:0;">
+<div class="value-box-grid html-fill-item" style="--bslib-grid-height:auto;--bslib-grid-height-mobile:auto;---bslib-value-box-showcase-w:30%;---bslib-value-box-showcase-w-fs:1fr;---bslib-value-box-showcase-max-h:100px;---bslib-value-box-showcase-max-h-fs:67%;">
+<div class="value-box-showcase html-fill-item html-fill-container"><svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" class="bi bi-graph-down-arrow " style="height:30px;width:30px;fill:currentColor;vertical-align:-0.125em;" aria-hidden="true" role="img"><path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm10 11.5a.5.5 0 0 0 .5.5h4a.5.5 0 0 0 .5-.5v-4a.5.5 0 0 0-1 0v2.6l-3.613-4.417a.5.5 0 0 0-.74-.037L7.06 8.233 3.404 3.206a.5.5 0 0 0-.808.588l4 5.5a.5.5 0 0 0 .758.06l2.609-2.61L13.445 11H10.5a.5.5 0 0 0-.5.5Z"></path></svg></div>
+<div class="value-box-area html-fill-item html-fill-container">
+<p style="font-size: 12px; margin: 0;" class="value-box-title">Change in # Awards Funded Since 2021</p>
+<p style="font-size: 16px; margin: 0;" class="value-box-value">-34.48%</p>
+</div>
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+<div class="card bslib-card bslib-mb-spacing html-fill-container bslib-value-box showcase-left-center html-fill-item" data-bslib-card-init="" data-require-bs-caller="card()" data-require-bs-version="5 5" style="color:#FFFFFF;background-color:#289672ff;--bslib-color-fg:#FFFFFF;--bslib-color-bg:#289672ff;" data-full-screen="false">
+<div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto; padding:0;">
+<div class="value-box-grid html-fill-item" style="--bslib-grid-height:auto;--bslib-grid-height-mobile:auto;---bslib-value-box-showcase-w:30%;---bslib-value-box-showcase-w-fs:1fr;---bslib-value-box-showcase-max-h:100px;---bslib-value-box-showcase-max-h-fs:67%;">
+<div class="value-box-showcase html-fill-item html-fill-container">
+<i class="fas fa-money-check-dollar" role="presentation" aria-label="money-check-dollar icon" style="font-size: 30px;"></i>
+</div>
+<div class="value-box-area html-fill-item html-fill-container">
+<p style="font-size: 12px;" class="value-box-title">Total $ Funded in 2025</p>
+<p style="font-size: 16px;" class="value-box-value">$8.08B</p>
+</div>
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+<div class="card bslib-card bslib-mb-spacing html-fill-container bslib-value-box showcase-left-center html-fill-item" data-bslib-card-init="" data-require-bs-caller="card()" data-require-bs-version="5 5" style="color:#FFFFFF;background-color:#2c00b0ff;--bslib-color-fg:#FFFFFF;--bslib-color-bg:#2c00b0ff;" data-full-screen="false">
+<div class="card-body bslib-gap-spacing html-fill-item html-fill-container" style="margin-top:auto;margin-bottom:auto;flex:1 1 auto; padding:0;">
+<div class="value-box-grid html-fill-item" style="--bslib-grid-height:auto;--bslib-grid-height-mobile:auto;---bslib-value-box-showcase-w:30%;---bslib-value-box-showcase-w-fs:1fr;---bslib-value-box-showcase-max-h:100px;---bslib-value-box-showcase-max-h-fs:67%;">
+<div class="value-box-showcase html-fill-item html-fill-container">
+<i class="fas fa-award" role="presentation" aria-label="award icon" style="font-size: 30px;"></i>
+</div>
+<div class="value-box-area html-fill-item html-fill-container">
+<p style="font-size: 12px;" class="value-box-title">Total New &amp; Renewed* Awards</p>
+<p style="font-size: 16px;" class="value-box-value">11,822</p>
+<p style="font-size: 8px;">*Competing renewals</p>
+</div>
+</div>
+</div>
+<script data-bslib-card-init="">bslib.Card.initializeAllCards();</script>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div><div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 70fr) minmax(3em, 30fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="row html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr) minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container no-overflow-x">
+<div class="row html-fill-item html-fill-container">
+<div class="col-sm-2 html-fill-item html-fill-container">
+<div class="form-group shiny-input-container html-fill-item html-fill-container">
+<label class="control-label" id="source-label" for="source">Select Funding Source:</label>
+<div class="html-fill-item html-fill-container">
+<select id="source" class="shiny-input-select"><option value="NIH">NIH</option>
+<option value="NSF">NSF</option>
+<option value="Combined" selected="">Combined</option></select>
+<script type="application/json" data-for="source" data-nonempty="">{"plugins":["selectize-plugin-a11y"]}</script>
+</div>
+</div>
+</div>
+<div class="col-sm-4 html-fill-item html-fill-container">
+<div class="form-group shiny-input-container html-fill-item html-fill-container no-baseline">
+<label class="control-label" id="year-label" for="year">Select Year:</label>
+<input class="js-range-slider" id="year" data-skin="shiny" data-min="2021" data-max="2025" data-from="2025" data-step="1" data-grid="true" data-grid-num="4" data-grid-snap="false" data-prettify-separator="" data-prettify-enabled="false" data-keyboard="true" data-data-type="number">
+<div class="slider-animate-container html-fill-item html-fill-container">
+<a href="#" class="slider-animate-button" data-target-id="year" data-interval="1000" data-loop="FALSE">
+<span class="play">
+<i aria-label="play icon" class="glyphicon glyphicon-play" role="presentation"></i>
+</span>
+<span class="pause">
+<i aria-label="pause icon" class="glyphicon glyphicon-pause" role="presentation"></i>
+</span>
+</a>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="leaflet html-widget html-widget-output shiny-report-size html-fill-item html-fill-container" id="map" style="width:100%;height:400px;"></div>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div><div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container no-overflow-x">
+<div class="form-group shiny-input-container html-fill-item html-fill-container">
+<label class="control-label" id="Funding_organization-label" for="Funding_organization">Select Funding Agency:</label>
+<div class="html-fill-item html-fill-container">
+<select id="Funding_organization" class="shiny-input-select"><option value="AHRQ">AHRQ</option>
+<option value="ATSDR">ATSDR</option>
+<option value="BCS">BCS</option>
+<option value="FDA">FDA</option>
+<option value="FIC">FIC</option>
+<option value="MCB">MCB</option>
+<option value="NCATS">NCATS</option>
+<option value="NCBDDD">NCBDDD</option>
+<option value="NCCDPHP">NCCDPHP</option>
+<option value="NCCIH">NCCIH</option>
+<option value="NCEH">NCEH</option>
+<option value="NCEZID">NCEZID</option>
+<option value="NCHHSTP">NCHHSTP</option>
+<option value="NCI" selected="">NCI</option>
+<option value="NCIPC">NCIPC</option>
+<option value="NCIRD">NCIRD</option>
+<option value="NEI">NEI</option>
+<option value="NHGRI">NHGRI</option>
+<option value="NHLBI">NHLBI</option>
+<option value="NIA">NIA</option>
+<option value="NIAAA">NIAAA</option>
+<option value="NIAID">NIAID</option>
+<option value="NIAMS">NIAMS</option>
+<option value="NIBIB">NIBIB</option>
+<option value="NICHD">NICHD</option>
+<option value="NIDA">NIDA</option>
+<option value="NIDCD">NIDCD</option>
+<option value="NIDCR">NIDCR</option>
+<option value="NIDDK">NIDDK</option>
+<option value="NIEHS">NIEHS</option>
+<option value="NIGMS">NIGMS</option>
+<option value="NIMH">NIMH</option>
+<option value="NIMHD">NIMHD</option>
+<option value="NINDS">NINDS</option>
+<option value="NINR">NINR</option>
+<option value="NIOSH">NIOSH</option>
+<option value="NLM">NLM</option></select>
+<script type="application/json" data-for="Funding_organization" data-nonempty="">{"plugins":["selectize-plugin-a11y"]}</script>
+</div>
+</div>
+</div>
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="shiny-plot-output html-fill-item html-fill-container" id="histogram" style="width:100%;height:400px;"></div>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+<div class="row html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-title="Funding Breakdown by Year and Source" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-header"><div class="card-title"><span style="display: inline">
+Funding Breakdown by Year and Source
+</span></div></div>
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<table class="table caption-top table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: right;" data-quarto-table-cell-role="th">Year</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th"># NIH Awards</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Total NIH Awards ($)</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th"># NSF Awards</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Total NSF Awards ($)</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Combined # Awards</th>
+<th style="text-align: left;" data-quarto-table-cell-role="th">Combined Awards ($)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: right;">2021</td>
+<td style="text-align: left;">17,353</td>
+<td style="text-align: left;">9,063,355,326</td>
+<td style="text-align: left;">689</td>
+<td style="text-align: left;">298,294,461</td>
+<td style="text-align: left;">18,042</td>
+<td style="text-align: left;">9,361,649,787</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2022</td>
+<td style="text-align: left;">17,715</td>
+<td style="text-align: left;">10,069,102,369</td>
+<td style="text-align: left;">618</td>
+<td style="text-align: left;">251,661,063</td>
+<td style="text-align: left;">18,333</td>
+<td style="text-align: left;">10,320,763,432</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2023</td>
+<td style="text-align: left;">17,440</td>
+<td style="text-align: left;">9,352,844,520</td>
+<td style="text-align: left;">618</td>
+<td style="text-align: left;">259,811,835</td>
+<td style="text-align: left;">18,058</td>
+<td style="text-align: left;">9,612,656,355</td>
+</tr>
+<tr class="even">
+<td style="text-align: right;">2024</td>
+<td style="text-align: left;">16,657</td>
+<td style="text-align: left;">8,797,048,062</td>
+<td style="text-align: left;">565</td>
+<td style="text-align: left;">209,797,172</td>
+<td style="text-align: left;">17,222</td>
+<td style="text-align: left;">9,006,845,234</td>
+</tr>
+<tr class="odd">
+<td style="text-align: right;">2025</td>
+<td style="text-align: left;">11,553</td>
+<td style="text-align: left;">7,982,975,457</td>
+<td style="text-align: left;">269</td>
+<td style="text-align: left;">96,463,462</td>
+<td style="text-align: left;">11,822</td>
+<td style="text-align: left;">8,079,438,919</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div>
+</div>
+</div>
+<div id="interactive-heatmap" class="dashboard-page tab-pane grid-skip html-fill-item html-fill-container dashboard-sidebar-container" data-orientation="rows" aria-labelledby="tab-interactive-heatmap">
+<div class="bslib-sidebar-layout html-fill-item html-fill-container" data-bslib-sidebar-open="desktop" data-bslib-sidebar-init="true" data-bslib-sidebar-border="false" data-bslib-sidebar-border-radius="false"><div class="main html-fill-container html-fill-item"><div class="sidebar-content html-fill-item html-fill-container">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="vertical-stack-container html-fill-item html-fill-container">
+<div class="heatmap-card html-fill-item html-fill-container">
+<h4>NIH Funding</h4>
+<div class="girafe-container html-fill-item html-fill-container">
+<div class="girafe html-widget html-widget-output shiny-report-size html-fill-item html-fill-container" id="heatmap_nih" style="width:100%;height:100%;"></div>
+</div>
+</div>
+<div class="heatmap-card html-fill-item html-fill-container">
+<h4>NSF Funding</h4>
+<div class="girafe-container html-fill-item html-fill-container">
+<div class="girafe html-widget html-widget-output shiny-report-size html-fill-item html-fill-container" id="heatmap_nsf" style="width:100%;height:100%;"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div>
+</div></div><aside id="bslib-sidebar-1" class="sidebar html-fill-container html-fill-item"><div class="html-fill-item html-fill-container">
+<div class="cell-output-display no-overflow-x">
+<div class="form-group shiny-input-container">
+<label class="control-label" id="y_var-label" for="y_var">Y axis column</label>
+<div>
+<select id="y_var" class="shiny-input-select"><option value="Organization_state" selected="">State</option>
+<option value="Funding_organization">Organization</option>
+<option value="Activity">Grant subtypes</option>
+<option value="Activity Category">Grant types</option></select>
+<script type="application/json" data-for="y_var" data-nonempty="">{"plugins":["selectize-plugin-a11y"]}</script>
+</div>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="metric" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="metric-label">
+<label class="control-label" id="metric-label" for="metric">Heatmap color metric</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="metric" value="mean_award" checked="checked">
+<span>Mean award amount</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="metric" value="median_award">
+<span>Median award amount</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="metric" value="total_award">
+<span>Total award amount</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="metric" value="count_awards">
+<span>Count of awards</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="metric" value="change_total_2021">
+<span>%Change in Total Award (vs 2021)</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+</div></aside>
+<button class="collapse-toggle" type="button" title="Toggle sidebar" aria-expanded="true" aria-controls="bslib-sidebar-1">
+    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" class="bi bi-chevron-left collapse-icon" style="fill:currentColor;" aria-hidden="true" role="img">
+      <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path>
+    </svg>
+</button>
+<script data-bslib-sidebar-init="">
+bslib.Sidebar.initCollapsibleAll()
+</script>
+</div>
+</div>
+<div id="text-analysis" class="dashboard-page tab-pane grid-skip html-fill-item html-fill-container dashboard-sidebar-container" data-orientation="rows" aria-labelledby="tab-text-analysis">
+<div class="bslib-sidebar-layout html-fill-item html-fill-container" data-bslib-sidebar-open="desktop" data-bslib-sidebar-init="true"><div class="main html-fill-container html-fill-item"><div class="sidebar-content html-fill-item html-fill-container">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr) minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 1fr) minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="shiny-plot-output html-fill-item html-fill-container" id="top_bigrams_plot" style="width:100%;height:400px;"></div>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="shiny-plot-output html-fill-item html-fill-container" id="logratio_plot" style="width:100%;height:400px;"></div>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div>
+</div>
+</div><div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-rows: minmax(3em, 1fr); grid-auto-columns: minmax(0, 1fr);">
+<div class="html-fill-item html-fill-container bslib-grid" style="display: grid; grid-template-columns: minmax(3em, 1fr);
+grid-auto-rows: minmax(0, 1fr);">
+<div class="card cell html-fill-item html-fill-container bslib-card" data-bslib-card-init="" data-require-bs-caller="card()" data-full-screen="false">
+<div class="card-body html-fill-item html-fill-container">
+<div class="cell-output-display html-fill-item html-fill-container">
+<div class="shiny-plot-output html-fill-item html-fill-container" id="buzzword_trends_plot" style="width:100%;height:400px;"></div>
+</div>
+</div>
+<bslib-tooltip placement="auto" bsoptions="[]" data-require-bs-version="5" data-require-bs-caller="tooltip()">
+    <template>Expand</template>
+    <span class="bslib-full-screen-enter badge rounded-pill">
+        <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 24 24" style="height:1em;width:1em;" aria-hidden="true" role="img"><path d="M20 5C20 4.4 19.6 4 19 4H13C12.4 4 12 3.6 12 3C12 2.4 12.4 2 13 2H21C21.6 2 22 2.4 22 3V11C22 11.6 21.6 12 21 12C20.4 12 20 11.6 20 11V5ZM4 19C4 19.6 4.4 20 5 20H11C11.6 20 12 20.4 12 21C12 21.6 11.6 22 11 22H3C2.4 22 2 21.6 2 21V13C2 12.4 2.4 12 3 12C3.6 12 4 12.4 4 13V19Z"></path></svg>
+    </span>
+</bslib-tooltip><script data-bslib-card-init="">bslib.Card.initializeAllCards();</script></div><div id="3ade8a4a-fb1d-4a6c-8409-ac45482d5fc9" class="hidden html-fill-item html-fill-container">
+
+</div>
+</div>
+</div>
+</div>
+</div></div><aside id="bslib-sidebar-2" class="sidebar html-fill-container html-fill-item"><div class="html-fill-item html-fill-container">
+<div class="cell-output-display no-overflow-x">
+<div class="form-group shiny-input-container">
+<label class="control-label" id="field-label" for="field">Text field</label>
+<div>
+<select id="field" class="shiny-input-select"><option value="Title">Title</option>
+<option value="Abstract_clean" selected="">Abstract</option></select>
+<script type="application/json" data-for="field" data-nonempty="">{"plugins":["selectize-plugin-a11y"]}</script>
+</div>
+</div>
+</div>
+<div class="cell-output-display">
+<div id="source" class="form-group shiny-input-checkboxgroup shiny-input-container" role="group" aria-labelledby="source-label">
+<label class="control-label" id="source-label" for="source">Source</label>
+<div class="shiny-options-group">
+<div class="checkbox">
+<label>
+<input type="checkbox" name="source" value="NIH" checked="checked">
+<span>NIH</span>
+</label>
+</div>
+<div class="checkbox">
+<label>
+<input type="checkbox" name="source" value="NSF" checked="checked">
+<span>NSF</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="form-group shiny-input-container">
+<label class="control-label" id="top_n_bigrams-label" for="top_n_bigrams">Top N bigrams (by frequency)</label>
+<input id="top_n_bigrams" type="number" class="shiny-input-number form-control" value="15" data-update-on="change" min="5" max="30" step="1">
+</div>
+</div>
+<div class="cell-output-display">
+<div class="form-group shiny-input-container">
+<label class="control-label" id="top_n_lr-label" for="top_n_lr">Top N bigrams in log-ratio (per side)</label>
+<input id="top_n_lr" type="number" class="shiny-input-number form-control" value="15" data-update-on="change" min="5" max="30" step="1">
+</div>
+</div>
+<div class="cell-output-display">
+<div id="buzz_set" class="form-group shiny-input-radiogroup shiny-input-container" role="radiogroup" aria-labelledby="buzz_set-label">
+<label class="control-label" id="buzz_set-label" for="buzz_set">Buzzword set (bigrams in abstracts)</label>
+<div class="shiny-options-group">
+<div class="radio">
+<label>
+<input type="radio" name="buzz_set" value="science" checked="checked">
+<span>Science-related</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="buzz_set" value="training">
+<span>Training / infra</span>
+</label>
+</div>
+<div class="radio">
+<label>
+<input type="radio" name="buzz_set" value="narrative">
+<span>Narrative / policy</span>
+</label>
+</div>
+</div>
+</div>
+</div>
+<div class="cell-output-display">
+<div class="form-group shiny-input-container no-baseline">
+<label class="control-label" id="year_range-label" for="year_range">Year range (buzzword trends)</label>
+<input class="js-range-slider" id="year_range" data-skin="shiny" data-type="double" data-min="2021" data-max="2026" data-from="2021" data-to="2026" data-step="0.05" data-grid="true" data-grid-num="10" data-grid-snap="false" data-prettify-separator="" data-prettify-enabled="false" data-keyboard="true" data-drag-interval="true" data-data-type="number">
+</div>
+</div>
+</div></aside>
+<button class="collapse-toggle" type="button" title="Toggle sidebar" aria-expanded="true" aria-controls="bslib-sidebar-2">
+    <svg xmlns="http://www.w3.org/2000/svg" viewbox="0 0 16 16" class="bi bi-chevron-left collapse-icon" style="fill:currentColor;" aria-hidden="true" role="img">
+      <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path>
+    </svg>
+</button>
+<script data-bslib-sidebar-init="">
+bslib.Sidebar.initCollapsibleAll()
+</script>
+</div>
+</div>
+</div>
+<p>
+<script type="application/shiny-prerendered" data-context="server-start">
+library(rsconnect)
+library(shiny)
+library(tidyverse)
+library(leaflet)
+library(bslib)
+library(bsicons)
+library(fontawesome)
+library(quarto)
+library(lubridate)
+library(sf)
+library(tigris)
+library(knitr)
+library(here)
+library(ggiraph)
+library(scales)
+library(flexdashboard)
+library(tidytext)
+library(tibble)
+library(DT)
+library(readr)
+
+## Load data 
+merged_data = readRDS(here("data/merged_data.rds"))
+data_dictionary = read_csv(here('data/data_dictionary.csv'))
+
+## Setup for Page 1
+#| context: setup
+
+# Data preparation for merged data happen here 
+# Precompute some summaries data from our dataset for the plots
+amount_summary <- merged_data %>%
+  filter(Source %in% c("NIH", "NSF"),
+         Notification_year >= 2021,
+         Notification_year <= 2025) %>%
+  group_by(Notification_year, Source) %>%
+  summarise(
+    total_award = sum(Award_amount, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+count_summary <- merged_data %>%
+  filter(Source %in% c("NIH", "NSF"),
+         Notification_year >= 2021,
+         Notification_year <= 2025) %>%
+  group_by(Notification_year, Source) %>%
+  summarise(
+    n_awards = n(),
+    .groups = "drop"
+  )
+
+## Setup for Page 2
+# Table for funding by notification year
+
+summary_table <- merged_data %>%
+  filter(
+    Source %in% c("NIH", "NSF"),
+    Notification_year != 2020,
+    Notification_year != 2026
+  ) %>%
+  group_by(Notification_year, Source) %>%
+  summarise(
+    total_award_amount = sum(Award_amount, na.rm = TRUE),
+    count = n(),
+    .groups = "drop"
+  ) %>%
+  pivot_wider(
+    names_from = Source,
+    values_from = c(count, total_award_amount)
+  ) %>%
+  mutate(Total = coalesce(count_NIH, 0) + coalesce(count_NSF, 0)) %>%
+  mutate(
+    Total_award_amount = coalesce(total_award_amount_NIH, 0) +
+      coalesce(total_award_amount_NSF, 0)
+  ) %>%
+  arrange(Notification_year) %>%
+  select(
+    Year = Notification_year,
+    "# NIH Awards" = count_NIH,
+    "Total NIH Awards ($)" = total_award_amount_NIH,
+    "# NSF Awards" = count_NSF,
+    "Total NSF Awards ($)" = total_award_amount_NSF,
+    "Combined # Awards" = Total,
+    "Combined Awards ($)" = Total_award_amount
+  ) %>%
+  arrange(Year)
+
+funding2025 = summary_table %>%
+  filter(Year == 2025) %>%
+  select("Combined Awards ($)") %>%
+  pull()
+
+funding2025billions = funding2025 / 1e9
+funding2025billions_format = scales::dollar(
+  funding2025billions,
+  prefix = "$",
+  suffix = "B",
+  accuracy = 0.01
+)
+
+# Number of awards table
+award2025 = summary_table %>%
+  filter(Year == 2025) %>%
+  select("Combined # Awards") %>%
+  pull()
+
+# Yearly Funding Amount and Number of Awards Percent Reduction
+summary_data <- merged_data %>%
+  filter(
+    Source %in% c("NIH", "NSF"),
+    Notification_year >= 2021,
+    Notification_year <= 2025
+  ) %>%
+  group_by(Notification_year, Source) %>%
+  summarise(
+    total_amount = sum(Award_amount, na.rm = TRUE),
+    count_awards = n(),
+    .groups = "drop"
+  )
+
+summary_total <- summary_data %>%
+  group_by(Notification_year) %>%
+  summarise(
+    total_amount = sum(total_amount),
+    total_awards = sum(count_awards)
+  ) %>%
+  arrange(Notification_year)
+
+summary_pct <- summary_total %>%
+  arrange(Notification_year) %>%
+  mutate(
+    pct_change_funding_amount = (total_amount - lag(total_amount)) /
+      lag(total_amount) * 100,
+    pct_change_number_of_awards = (total_awards - lag(total_awards)) /
+      lag(total_awards) * 100
+  )
+
+pct_2021_2025_funding_amount <-
+  (summary_total$total_amount[summary_total$Notification_year == 2025] -
+    summary_total$total_amount[summary_total$Notification_year == 2021]) /
+  summary_total$total_amount[summary_total$Notification_year == 2021] * 100
+
+pct_2021_2025_number_of_awards <-
+  (summary_total$total_awards[summary_total$Notification_year == 2025] -
+    summary_total$total_awards[summary_total$Notification_year == 2021]) /
+  summary_total$total_awards[summary_total$Notification_year == 2021] * 100
+
+# Funding Distribution Map by State
+
+state_funding = merged_data %>%
+  filter(Source %in% c("NIH", "NSF")) %>%
+  group_by(Organization_state, Source, Notification_year) %>%
+  summarise(
+    total_funding = sum(Award_amount, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+combined_state_funding = state_funding %>%
+  filter(Source %in% c("NIH", "NSF")) %>%
+  group_by(Organization_state, Notification_year) %>%
+  summarise(
+    total_funding = sum(total_funding, na.rm = TRUE),
+    Source = "Combined",
+    .groups = "drop"
+  )
+
+final_state_funding = bind_rows(state_funding, combined_state_funding)
+
+state_lookup <- data.frame(
+  abbr = c(
+    "AL","AK","AS","AZ","AR","CA","CO","CT","DC","DE","FL","GA","HI","ID","IL",
+    "IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV",
+    "NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX",
+    "UT","VT","VA","WA","WV","WI","WY"
+  ),
+  full_name = c(
+    "Alabama","Alaska","American Samoa","Arizona","Arkansas","California",
+    "Colorado","Connecticut","District of Columbia","Delaware","Florida",
+    "Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky",
+    "Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota",
+    "Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire",
+    "New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio",
+    "Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina",
+    "South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington",
+    "West Virginia","Wisconsin","Wyoming"
+  ),
+  stringsAsFactors = FALSE
+)
+
+# Funding agency choices
+fundingagency = sort(unique(merged_data$Funding_organization))
+
+
+# --- CONSTANTS ---
+AWARD_COL  <- "Award_amount"
+YEAR_COL   <- "Notification_year"
+SOURCE_COL <- "Source"
+
+# --- HELPER: ROBUST LIMITS ---
+# Calculates plot limits while ignoring outliers and handling all-NA cases
+get_robust_limits <- function(vals, metric) {
+  # Remove NAs and Infinite values
+  clean_vals <- vals[is.finite(vals)]
+  
+  # If no data, return default 0-1 range to prevent crash
+  if (length(clean_vals) == 0) return(c(0, 1))
+  
+  if (metric == "change_mean_2021") {
+    # Clamp percentage changes to +/- 100% (i.e., -1.0 to 1.0)
+    # This prevents extreme outliers (e.g. +5000% increase) from washing out the color scale
+    return(c(-1, 1))
+  } else {
+    # For dollar amounts, use 5th and 95th percentiles to ignore extremes
+    lims <- quantile(clean_vals, probs = c(0.05, 0.95), na.rm = TRUE)
+    
+    # If limits are identical (e.g. all 0), expand slightly to avoid scale error
+    if (lims[1] == lims[2]) {
+      return(c(lims[1] - 1, lims[2] + 1))
+    }
+    return(lims)
+  }
+}
+
+# --- HELPER: MIDPOINT ---
+get_midpoint <- function(vals, metric) {
+  if (metric == "change_mean_2021") {
+    return(0) # Change metric is always centered at 0% (White)
+  } else {
+    clean_vals <- vals[is.finite(vals)]
+    if(length(clean_vals) == 0) return(0)
+    return(median(clean_vals, na.rm = TRUE)) # Median is safer than Mean for skewed money data
+  }
+}
+
+
+# 1) read in preprocessed bigram data
+bigrams_year <- readRDS(here('data/words_year_small.rds'))
+
+# 2) combine across years
+bigrams_all <- bigrams_year %>%
+  group_by(Source, field, bigram) %>%
+  summarise(n = sum(n), .groups = "drop")
+
+# 3) create field choices: Abstract or Title (or both)
+has_title    <- "Title" %in% bigrams_year$field
+has_abstract <- "Abstract_clean" %in% bigrams_year$field
+
+field_choices <- c()
+if (has_title) {
+  field_choices["Title"]    <- "Title"
+}
+if (has_abstract) {
+  field_choices["Abstract"] <- "Abstract_clean"
+}
+
+# 4) source: NIH, NSF
+source_choices <- sort(unique(bigrams_year$Source))
+
+# 5) year range
+year_min <- min(bigrams_year$Year, na.rm = TRUE)
+year_max <- max(bigrams_year$Year, na.rm = TRUE)
+
+# 6) buzzword catalog
+buzz_catalog <- tribble(
+  ~bigram,               ~set,          ~theme,
+  # 1) Science / mechanism
+  "single cell",         "science",     "mechanism",
+  "cell types",          "science",     "mechanism",
+  "gene expression",     "science",     "mechanism",
+  "stem cells",          "science",     "model",
+  "mouse models",        "science",     "model",
+  "animal models",       "science",     "model",
+  "molecular mechanisms","science",     "mechanism",
+  "immune responses",    "science",     "immune",
+  "breast cancer",       "science",     "disease",
+  "alzheimers disease",  "science",     "disease",
+  "sars cov",            "science",     "disease",
+
+  # 2) Training / infrastructure (NSF-style language)
+  "graduate students",       "training", "students",
+  "graduate student",        "training", "students",
+  "undergraduate students",  "training", "students",
+  "school students",         "training", "students",
+  "synthetic biology",       "training", "discipline",
+  "cellular biosciences",    "training", "discipline",
+  "biological sciences",     "training", "discipline",
+  "effective infrastructure","training", "infrastructure",
+  "data collection",         "training", "data",
+
+  # 3) Narrative / boilerplate / policy
+  "preliminary data",    "narrative", "grant_narrative",
+  "term goal",           "narrative", "grant_narrative",
+  "central hypothesis",  "narrative", "grant_narrative",
+  "broader impacts",     "narrative", "review_criteria",
+  "cutting edge",        "narrative", "hype",
+  "mechanisms underlying","narrative","grant_narrative",
+  "poorly understood",   "narrative", "hype",
+  "real time",           "narrative", "methods",
+  "rescue plan",         "narrative", "policy_program",
+  "american rescue",     "narrative", "policy_program",
+  "wide range",          "narrative", "hype"
+)
+
+# 7) buzzword sets
+buzz_sets <- sort(unique(buzz_catalog$set))
+
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+# Tab 1 Output: Award Amount plot
+output$intro_amount_plot <- renderPlot({
+  
+  ggplot(amount_summary,
+         aes(x = Notification_year,
+             y = total_award,
+             color = Source,
+             group = Source)) +
+    geom_line(size = 1.3) +
+    geom_point(size = 3) +
+    geom_text(
+      aes(label = paste0(round(total_award / 1e9, 2), "B")),
+      vjust = -0.8,
+      size  = 4,
+      fontface = "bold", 
+      color = "black",
+      show.legend = FALSE
+    ) +
+    facet_wrap(~ Source, ncol = 1, scales = "free_y") +
+    scale_y_continuous(
+      labels = scales::label_dollar(scale = 1e-9, suffix = "B"),
+      expand = expansion(mult = c(0.05, 0.20))
+    ) +
+    labs(
+      title = "Total Award Amount by Year (NIH vs NSF)",
+      x = "Award Notice Year",
+      y = "Total Award Amount (Billion $)"
+    ) +
+    theme_minimal(base_size = 14) +
+    theme(
+      legend.position = "none",
+      strip.text = element_text(size = 13, face = "bold"),
+      plot.margin = margin(20, 20, 20, 20)
+    )
+})
+
+# Tab 2 Output: Number of Awards plot 
+output$intro_count_plot <- renderPlot({
+  
+  ggplot(count_summary,
+         aes(x = Notification_year,
+             y = n_awards,
+             color = Source,
+             group = Source)) +
+    geom_line(size = 1.3) +
+    geom_point(size = 3) +
+    geom_text(
+      aes(label = scales::comma(n_awards)),
+      vjust = -1.2,
+      size  = 4,
+      fontface = "bold",
+      color = "black",
+      show.legend = FALSE
+    ) +
+    facet_wrap(~ Source, ncol = 1, scales = "free_y") +
+    scale_y_continuous(
+      labels = scales::comma,
+      expand = expansion(mult = c(0.05, 0.25))
+    ) +
+    labs(
+      title = "Number of Awards by Year (NIH vs NSF)",
+      x = "Award Notice Year",
+      y = "Number of Awards"
+    ) +
+    theme_minimal(base_size = 14) +
+    theme(
+      legend.position = "none",
+      strip.text = element_text(size = 13, face = "bold"),
+      plot.margin = margin(20, 20, 20, 20)
+    )
+})
+
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+# Tab 2 output: Data table
+
+output$data_preview <- renderDataTable({
+
+  df_display <- merged_data   # keep EVERYTHING
+
+
+  pretty_names <- c(
+    Funding_organization = "Funding organization",
+    Organization_name    = "Organization name",
+    Organization_city    = "Organization city",
+    Organization_state   = "Organization state",
+    Start_date           = "Start date",
+    End_date             = "End date",
+    Award_amount         = "Award amount",
+    Notification_date    = "Notification date",
+    Notification_year    = "Notification year",
+    Abstract             = "Project summary"
+  )
+
+
+  final_colnames <- ifelse(
+    names(df_display) %in% names(pretty_names),
+    pretty_names[names(df_display)],
+    names(df_display) 
+  )
+
+  DT::datatable(
+    df_display,
+    colnames = final_colnames,
+    options = list(
+      pageLength = 10,
+      autoWidth  = TRUE,
+      scrollX    = TRUE,
+
+      columnDefs = list(
+        list(
+          targets = which(names(df_display) == "Abstract") - 1,  # convert to 0-based index
+          render = DT::JS(
+            "function(data, type, row, meta) {",
+            "  if (type === 'display' && data != null) {",
+            "    var short = data.length > 120 ? data.substr(0, 120) + '…' : data;",
+            "    var safeFull = data.replace(/\"/g, '&quot;');",
+            "    return '<span title=\"' + safeFull + '\">' + short + '<\u002fspan>';",
+            "  }",
+            "  return data;",
+            "}"
+          )
+        )
+      )
+    ),
+    rownames = FALSE,
+    escape   = FALSE
+  )
+})
+
+
+# Tab2 Output: Data dictionary table
+output$data_dictionary <- renderDataTable({
+
+  df_dict <- data_dictionary   
+
+
+  pretty_names <- c(
+    Composite_Variable_Name = "Composite variable name",
+    Variable_Type           = "Variable type"
+  )
+
+ 
+  final_colnames <- ifelse(
+    names(df_dict) %in% names(pretty_names),
+    pretty_names[names(df_dict)],
+    names(df_dict)
+  )
+
+  DT::datatable(
+    df_dict,
+    colnames = final_colnames,
+    options = list(
+      pageLength = 10,
+      autoWidth  = TRUE,
+      scrollX    = TRUE
+    ),
+    rownames = FALSE
+  )
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+output$map <- renderLeaflet({
+  funding_data_selected <- final_state_funding %>%
+    filter(Source == input$source & Notification_year == input$year) %>%
+    left_join(state_lookup, by = c("Organization_state" = "abbr")) %>%
+    ungroup()
+
+  states <- states(cb = TRUE, resolution = "20m") %>%
+    st_transform(4326)
+
+  amounts <- funding_data_selected$total_funding[match(
+    states$STUSPS,
+    funding_data_selected$Organization_state
+  )]
+
+  pal <- colorNumeric("RdYlBu", domain = final_state_funding$total_funding)
+
+  labels <- ifelse(
+    is.na(amounts),
+    funding_data_selected$full_name[match(
+      states$STUSPS,
+      funding_data_selected$Organization_state
+    )],
+    paste(
+      funding_data_selected$full_name[match(
+        states$STUSPS,
+        funding_data_selected$Organization_state
+      )],
+      ": $",
+      prettyNum(amounts, big.mark = ","),
+      sep = ""
+    )
+  )
+
+  leaflet(data = states) %>%
+    addTiles() %>%
+    setView(lng = -97, lat = 37.5, zoom = 3) %>%
+    addPolygons(
+      fillColor = ~ pal(amounts),
+      color = "#BDBDC3",
+      weight = 1,
+      opacity = 1,
+      fillOpacity = 0.7,
+      highlight = highlightOptions(
+        weight = 2,
+        color = "#666",
+        fillOpacity = 0.7,
+        bringToFront = TRUE
+      ),
+      label = labels,
+      labelOptions = labelOptions(
+        style = list("font-weight" = "bold"),
+        textsize = "15px"
+      )
+    ) %>%
+    addLegend(
+      position = "bottomright",
+      pal = pal,
+      values = funding_data_selected$total_funding,
+      title = "Funding Amounts ($)",
+      labFormat = labelFormat(big.mark = ","),
+      opacity = 0.7
+    )
+})
+
+output$histogram <- renderPlot({
+  agency_data <- merged_data %>%
+    filter(
+      Source %in% c("NIH", "NSF"),
+      Notification_year != 2020,
+      Notification_year != 2026
+    ) %>%
+    filter(Funding_organization == input$Funding_organization) %>%
+    group_by(Notification_year) %>%
+    summarise(total_award = sum(Award_amount, na.rm = TRUE))
+
+  ggplot(
+    agency_data,
+    aes(
+      x = Notification_year,
+      y = total_award,
+      fill = factor(Notification_year)
+    )
+  ) +
+    geom_bar(stat = "identity") +
+    labs(
+      title = paste(
+        "Total Award Amount Over Time for",
+        input$Funding_organization
+      ),
+      x = "Notification Year",
+      y = "Total Award Amount ($)"
+    ) +
+    scale_y_continuous(labels = scales::comma) +
+    scale_x_continuous(
+      breaks = seq(2015, 2025, by = 1),
+      labels = scales::number_format(accuracy = 1)
+    ) +
+    theme_minimal() +
+    theme(legend.position = "none")
+})
+
+
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+dataset <- reactive({
+  merged_data
+})
+
+states <- c('AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA',
+            'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
+            'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ',
+            'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC',
+            'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY')
+
+summarise_for_source <- function(source_value) {
+  req(input$y_var, input$metric)
+
+  # 1. Filter Data
+  df <- dataset() |>
+    filter(!is.na(.data[[YEAR_COL]])) |>
+    filter(as.character(.data[[YEAR_COL]]) != "2026") |>
+    filter(as.character(.data[[YEAR_COL]]) != "2020") |>
+    filter(.data[[SOURCE_COL]] == source_value) |>
+    filter(Organization_state %in% states)
+
+  if (nrow(df) == 0) {
+    return(tibble(.year_f = factor(), .y_label = factor(),
+                  mean_award = numeric(), median_award = numeric(),
+                  total_award = numeric(), count_awards = integer(),
+                  change_total_2021 = numeric()))
+  }
+
+  year_chr <- as.character(df[[YEAR_COL]])
+  year_levels <- sort(unique(year_chr))
+  
+  y_fac <- as.factor(df[[input$y_var]])
+  y_levels <- levels(y_fac)
+
+  df <- df |>
+    mutate(.year_f = factor(year_chr, levels = year_levels),
+           .y_label = y_fac) |>
+    filter(!is.na(.y_label))
+
+  # 2. Summarise Basic Metrics
+  df_sum <- df |>
+    group_by(.year_f, .y_label) |>
+    summarise(
+      mean_award   = mean(.data[[AWARD_COL]], na.rm = TRUE),
+      median_award = median(.data[[AWARD_COL]], na.rm = TRUE),
+      total_award  = sum(.data[[AWARD_COL]], na.rm = TRUE),
+      count_awards = n(),
+      .groups = "drop"
+    ) |>
+    tidyr::complete(.year_f = year_levels, .y_label = y_levels) |>
+    mutate(count_awards = replace_na(count_awards, 0))
+
+  # 3. Calculate "Change from 2021" (Percentage)
+  df_sum <- df_sum |>
+    group_by(.y_label) |>
+    mutate(
+      base_2021 = {
+        # Safely extract 2021 value. If 2021 is missing or NA, return NA.
+        val <- total_award[.year_f == "2021"]
+        if(length(val) == 0 || all(is.na(val))) NA_real_ else val[1]
+      },
+      # Formula: (Current - Base) / Base
+      change_total_2021 = (total_award - base_2021) / base_2021
+    ) |>
+    ungroup() |>
+    # Convert Infinite values (division by zero) to NA
+    mutate(change_total_2021 = ifelse(is.infinite(change_total_2021), NA_real_, change_total_2021))
+
+  # 4. Sort Y-axis based on 2025 value (Highest at Top)
+  current_metric <- input$metric
+  
+  if ("2025" %in% year_levels) {
+    order_df <- df_sum |>
+      filter(.year_f == "2025") |>
+      select(.y_label, sort_val = .data[[current_metric]]) |>
+      arrange(sort_val) # Ascending sort -> High values at top of Y-axis
+    
+    new_levels <- order_df$.y_label
+    final_levels <- union(new_levels, unique(df_sum$.y_label))
+    
+    df_sum <- df_sum |>
+      mutate(.y_label = factor(.y_label, levels = final_levels))
+  }
+
+  df_sum
+}
+
+plot_heatmap <- function(df_sum, metric_col, metric_lab, x_lab, subtitle_lab) {
+  vals <- df_sum[[metric_col]]
+  
+  # 1. Format String
+  if (metric_col == "change_total_2021") {
+    value_str <- scales::percent(vals, accuracy = 1)
+  } else if (metric_col == "count_awards") {
+    value_str <- scales::comma(vals)
+  } else {
+    value_str <- scales::dollar(vals)
+  }
+  
+  # 2. Color Scaling
+  limit_vals <- get_robust_limits(vals, metric_col)
+  mid_val    <- get_midpoint(vals, metric_col)
+
+  # 3. Tooltips (Updated labels for X=Attribute, Y=Year)
+  df_sum <- df_sum |>
+    mutate(
+      .tooltip = ifelse(
+        is.na(vals),
+        paste0("Year: ", .year_f, "\n", x_lab, ": ", .y_label, "\n", metric_lab, ": No data"),
+        paste0("Year: ", .year_f, "\n", x_lab, ": ", .y_label, "\n", metric_lab, ": ", value_str)
+      ),
+      .data_id = paste0(.year_f, "__", .y_label)
+    )
+
+  # 4. Plot (Swapped Axes: X = Attribute (.y_label), Y = Year (.year_f))
+  p <- ggplot(df_sum, aes(x = .y_label, y = .year_f)) +
+    geom_tile_interactive(aes(fill = .data[[metric_col]],
+                              tooltip = .tooltip,
+                              data_id = .data_id),
+                          color = NA) +
+    scale_fill_gradient2(
+      low = "#B2182B",   
+      mid = "#F7F7F7",   
+      high = "#2166AC",  
+      midpoint = mid_val,
+      limits = limit_vals,
+      oob = scales::squish, 
+      na.value = "grey95"
+    ) +
+    guides(fill = guide_colorbar(title.position = "top", 
+                                 direction = "horizontal",
+                                 barwidth = 20)) +
+    labs(
+      x = NULL, y = NULL, 
+      fill = metric_lab,
+      title = paste("Heatmap of", metric_lab),
+      subtitle = subtitle_lab
+    ) +
+    theme_minimal() +
+    theme(
+      # X-axis is now the Attribute (State/Org), so rotate text 90 deg
+      axis.text.x = element_text(size = 20),
+      # Y-axis is now Year, keep horizontal
+      axis.text.y = element_text(size = 24, face = "bold"),
+      panel.grid = element_blank(),
+      legend.position = "bottom",
+      plot.title = element_text(size = 36, face = "bold", hjust = 0.5),
+      plot.subtitle = element_text(size = 32, color = "grey30", hjust = 0.5),
+      legend.title = element_text(size = 20),
+      legend.text = element_text(size = 16)
+    )
+
+  # 5. Adjusted Dimensions for Wide Layout
+  girafe(ggobj = p, 
+         width_svg = 50, # Made wide to fit many attributes on X
+         height_svg = 8, # Made shorter since Y (Years) is small
+         options = list(
+           opts_sizing(rescale = TRUE, width = 1.0), 
+           opts_hover(css = "opacity:1; stroke:black; stroke-width:2px;"),
+           opts_tooltip(css = "background-color: white; color: black; padding: 8px; border-radius: 4px;")
+         ))
+}
+
+output$heatmap_nih <- renderGirafe({
+  df_sum <- summarise_for_source("NIH")
+  metric_col <- input$metric
+  
+  metric_lab <- switch(metric_col,
+                       mean_award   = "Mean award amount",
+                       median_award = "Median award amount",
+                       total_award  = "Total award amount",
+                       count_awards = "Count of awards",
+                       change_total_2021 = "%Change in Total Award (vs 2021)")
+
+  validate(need(nrow(df_sum) > 0, "No NIH data available."))
+  # Passed Label "X:" instead of "Y:" since we swapped axes
+  plot_heatmap(df_sum, metric_col, metric_lab, paste("Attribute:", input$y_var), "Source: NIH")
+})
+
+output$heatmap_nsf <- renderGirafe({
+  df_sum <- summarise_for_source("NSF")
+  metric_col <- input$metric
+  
+  metric_lab <- switch(metric_col,
+                       mean_award   = "Mean award amount",
+                       median_award = "Median award amount",
+                       total_award  = "Total award amount",
+                       count_awards = "Count of awards",
+                       change_total_2021 = "%Change in Total Award (vs 2021)")
+
+  validate(need(nrow(df_sum) > 0, "No NSF data available."))
+  plot_heatmap(df_sum, metric_col, metric_lab, paste("Attribute:", input$y_var), "Source: NSF")
+})
+
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+output$top_bigrams_plot <- renderPlot({
+  req(input$field, input$source)
+
+  df <- bigrams_all %>%
+    filter(
+      field  == input$field,
+      Source %in% input$source
+    ) %>%
+    group_by(Source) %>%
+    mutate(
+      total = sum(n),
+      freq  = n / total
+    ) %>%
+    slice_max(freq, n = input$top_n_bigrams, with_ties = FALSE) %>%
+    ungroup() %>%
+    mutate(bigram = tidytext::reorder_within(bigram, freq, Source))
+
+  validate(
+    need(nrow(df) > 0,
+         "No bigrams after filtering — try changing field / source / Top N.")
+  )
+
+  ggplot(df, aes(x = bigram, y = freq)) +
+    geom_col() +
+    facet_wrap(~ Source, scales = "free_y") +
+    coord_flip() +
+    tidytext::scale_x_reordered() +
+    scale_y_continuous(labels = percent_format(accuracy = 0.01)) +
+    labs(
+      title = paste(
+        "Top", input$top_n_bigrams,
+        "bigrams in", ifelse(input$field == "Abstract_clean", "Abstracts", input$field),
+        "by source (relative frequency)"
+      ),
+      x = NULL,
+      y = "Proportion of bigrams"
+    )
+})
+
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+output$logratio_plot <- renderPlot({
+  req(input$field)
+
+  eps <- 1e-7
+
+  # 只用 NIH & NSF，同时跨年份合并（bigrams_all）
+  freq <- bigrams_all %>%
+    filter(
+      field  == input$field,
+      Source %in% c("NIH", "NSF")
+    ) %>%
+    group_by(Source) %>%
+    mutate(
+      total = sum(n),
+      freq  = n / total
+    ) %>%
+    ungroup() %>%
+    select(Source, bigram, freq) %>%
+    tidyr::pivot_wider(
+      names_from  = Source,
+      values_from = freq,
+      values_fill = 0
+    )
+
+  # 如果缺少 NIH 或 NSF，就没法算 log-ratio
+  if (!("NIH" %in% names(freq) && "NSF" %in% names(freq))) {
+    validate(need(FALSE, "Need both NIH and NSF to compute log-ratio."))
+  }
+
+  bigram_lr <- freq %>%
+    mutate(
+      log_ratio = log2((NIH + eps) / (NSF + eps)),
+      max_freq  = pmax(NIH, NSF)
+    ) %>%
+    # 丢掉极低频 bigrams
+    filter(max_freq > 1e-6)
+
+  nih_pref <- bigram_lr %>%
+    arrange(desc(log_ratio)) %>%
+    slice_head(n = input$top_n_lr) %>%
+    mutate(pref = "More NIH")
+
+  nsf_pref <- bigram_lr %>%
+    arrange(log_ratio) %>%
+    slice_head(n = input$top_n_lr) %>%
+    mutate(pref = "More NSF")
+
+  plot_dat <- bind_rows(nih_pref, nsf_pref) %>%
+    mutate(bigram = reorder(bigram, log_ratio))
+
+  validate(
+    need(nrow(plot_dat) > 0,
+         "Not enough overlapping bigrams between NIH and NSF to compute log-ratio.")
+  )
+
+  ggplot(plot_dat, aes(x = bigram, y = log_ratio, fill = pref)) +
+    geom_col() +
+    coord_flip() +
+    geom_hline(yintercept = 0, linetype = "dashed") +
+    labs(
+      title = paste0(
+        "Bigrams characteristic of NIH vs NSF (",
+        ifelse(input$field == "Abstract_clean", "Abstracts", input$field),
+        ")"
+      ),
+      x = NULL,
+      y = "log2(freq_NIH / freq_NSF)"
+    )
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server">
+output$buzzword_trends_plot <- renderPlot({
+  req(input$year_range, input$buzz_set)
+
+  # 1) 当前选中的 buzzword bigrams
+  buzz_vec <- buzz_catalog %>%
+    filter(set == input$buzz_set) %>%
+    pull(bigram)
+
+  # 2) 年份范围内，Abstract_clean + 这些 bigrams
+  trend_df <- bigrams_year %>%
+    filter(
+      field == "Abstract_clean",
+      Year >= input$year_range[1],
+      Year <= input$year_range[2],
+      bigram %in% buzz_vec
+    ) %>%
+    group_by(Source, Year) %>%
+    mutate(total = sum(n)) %>%
+    ungroup() %>%
+    mutate(freq = n / total) %>%
+    group_by(bigram) %>%
+    filter(any(freq > 0)) %>%
+    ungroup()
+
+  validate(
+    need(nrow(trend_df) > 0,
+         "No buzzword bigrams in abstracts for this set / year range.")
+  )
+
+  set_label <- dplyr::case_when(
+    input$buzz_set == "science"   ~ "Science-related",
+    input$buzz_set == "training"  ~ "Training / infrastructure",
+    input$buzz_set == "narrative" ~ "Narrative / policy",
+    TRUE ~ input$buzz_set
+  )
+
+  ggplot(trend_df, aes(x = Year, y = freq, color = Source, group = Source)) +
+    geom_line() +
+    geom_point() +
+    facet_wrap(~ bigram, scales = "free_y") +
+    scale_y_continuous(labels = percent_format(accuracy = 0.01)) +
+    scale_x_continuous(breaks = seq(input$year_range[1], input$year_range[2])) +
+    labs(
+      title = paste("Trends of", set_label, "bigrams in abstracts"),
+      x = "Fiscal year",
+      y = "Proportion of all bigrams (within Source × Year × field)"
+    )
+})
+</script>
+ 
+<script type="application/shiny-prerendered" data-context="server-extras">
+ojs_define <- function(..., .session = shiny::getDefaultReactiveDomain()) {
+  quos <- rlang::enquos(...)
+  vars <- rlang::list2(...)
+  nm <- names(vars)
+  if (is.null(nm)) {
+    nm <- rep_len("", length(vars))
+  }
+  mapply(
+    function(q, nm, val) {
+      # Infer name, if possible
+      if (nm == "") {
+        tryCatch(
+          {
+            nm <- rlang::as_name(q)
+          },
+          error = function(e) {
+            code <- paste(collapse = "\n", deparse(rlang::f_rhs(q)))
+            stop(
+              "ojs_define() could not create a name for the argument: ",
+              code
+            )
+          }
+        )
+      }
+      .session$output[[nm]] <- val
+      outputOptions(.session$output, nm, suspendWhenHidden = FALSE)
+      .session$sendCustomMessage("ojs-export", list(name = nm))
+      NULL
+    },
+    quos,
+    nm,
+    vars,
+    SIMPLIFY = FALSE,
+    USE.NAMES = FALSE
+  )
+  invisible()
+}
+</script>
+</p>
+<!--html_preserve-->
+<script type="application/shiny-prerendered" data-context="dependencies">
+{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmltools-fill"]},{"type":"character","attributes":{},"value":["0.5.8.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["fill"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["fill.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmltools"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.5.8.1"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmltools-fill"]},{"type":"character","attributes":{},"value":["0.5.8.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["fill"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["fill.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmltools"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.5.8.1"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmltools-fill"]},{"type":"character","attributes":{},"value":["0.5.8.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["fill"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["fill.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmltools"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.5.8.1"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets"]},{"type":"character","attributes":{},"value":["1.6.4"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmlwidgets.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmlwidgets"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["1.6.4"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["datatables-css"]},{"type":"character","attributes":{},"value":["0.0.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets/css"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["datatables-crosstalk.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["DT"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.34.0"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["datatables-binding"]},{"type":"character","attributes":{},"value":["0.34.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["datatables.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["DT"]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["0.34.0"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["3.5.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/jquery"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["crosstalk"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["1.2.2"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["crosstalk"]},{"type":"character","attributes":{},"value":["1.2.2"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["js/crosstalk.min.js"]},{"type":"character","attributes":{},"value":["css/crosstalk.min.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["crosstalk"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["1.2.2"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmltools-fill"]},{"type":"character","attributes":{},"value":["0.5.8.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["fill"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["fill.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmltools"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.5.8.1"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets"]},{"type":"character","attributes":{},"value":["1.6.4"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmlwidgets.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmlwidgets"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["1.6.4"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["datatables-css"]},{"type":"character","attributes":{},"value":["0.0.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets/css"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["datatables-crosstalk.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["DT"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.34.0"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["datatables-binding"]},{"type":"character","attributes":{},"value":["0.34.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["datatables.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["DT"]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["0.34.0"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["3.5.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/jquery"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["jquery.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["crosstalk"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["1.2.2"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["crosstalk"]},{"type":"character","attributes":{},"value":["1.2.2"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["js/crosstalk.min.js"]},{"type":"character","attributes":{},"value":["css/crosstalk.min.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["crosstalk"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["1.2.2"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmltools-fill"]},{"type":"character","attributes":{},"value":["0.5.8.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["fill"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["fill.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmltools"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.5.8.1"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bslib-component-js"]},{"type":"character","attributes":{},"value":["0.9.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["components/dist"]}]},{"type":"NULL"},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["src"]}},"value":[{"type":"character","attributes":{},"value":["components.min.js"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["src","type"]}},"value":[{"type":"character","attributes":{},"value":["web-components.min.js"]},{"type":"character","attributes":{},"value":["module"]}]}]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["bslib"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.9.0"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bslib-component-css"]},{"type":"character","attributes":{},"value":["0.9.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["components/dist"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["components.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["bslib"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.9.0"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bslib-tag-require"]},{"type":"character","attributes":{},"value":["0.9.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["components"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tag-require.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["bslib"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.9.0"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmltools-fill"]},{"type":"character","attributes":{},"value":["0.5.8.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["fill"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["fill.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmltools"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.5.8.1"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bslib-component-js"]},{"type":"character","attributes":{},"value":["0.9.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["components/dist"]}]},{"type":"NULL"},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["src"]}},"value":[{"type":"character","attributes":{},"value":["components.min.js"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["src","type"]}},"value":[{"type":"character","attributes":{},"value":["web-components.min.js"]},{"type":"character","attributes":{},"value":["module"]}]}]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["bslib"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.9.0"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bslib-component-css"]},{"type":"character","attributes":{},"value":["0.9.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["components/dist"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["components.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["bslib"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.9.0"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bslib-tag-require"]},{"type":"character","attributes":{},"value":["0.9.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["components"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tag-require.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["bslib"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.9.0"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["font-awesome"]},{"type":"character","attributes":{},"value":["6.5.2"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["fontawesome"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["css/all.min.css","css/v4-shims.min.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["fontawesome"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.5.3"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmltools-fill"]},{"type":"character","attributes":{},"value":["0.5.8.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["fill"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["fill.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmltools"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.5.8.1"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bslib-component-js"]},{"type":"character","attributes":{},"value":["0.9.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["components/dist"]}]},{"type":"NULL"},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["src"]}},"value":[{"type":"character","attributes":{},"value":["components.min.js"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["src","type"]}},"value":[{"type":"character","attributes":{},"value":["web-components.min.js"]},{"type":"character","attributes":{},"value":["module"]}]}]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["bslib"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.9.0"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bslib-component-css"]},{"type":"character","attributes":{},"value":["0.9.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["components/dist"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["components.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["bslib"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.9.0"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bslib-tag-require"]},{"type":"character","attributes":{},"value":["0.9.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["components"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tag-require.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["bslib"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.9.0"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["font-awesome"]},{"type":"character","attributes":{},"value":["6.5.2"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["fontawesome"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["css/all.min.css","css/v4-shims.min.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["fontawesome"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.5.3"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmltools-fill"]},{"type":"character","attributes":{},"value":["0.5.8.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["fill"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["fill.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmltools"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.5.8.1"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bslib-component-js"]},{"type":"character","attributes":{},"value":["0.9.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["components/dist"]}]},{"type":"NULL"},{"type":"list","attributes":{},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["src"]}},"value":[{"type":"character","attributes":{},"value":["components.min.js"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["src","type"]}},"value":[{"type":"character","attributes":{},"value":["web-components.min.js"]},{"type":"character","attributes":{},"value":["module"]}]}]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["bslib"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.9.0"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bslib-component-css"]},{"type":"character","attributes":{},"value":["0.9.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["components/dist"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["components.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["bslib"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.9.0"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["bslib-tag-require"]},{"type":"character","attributes":{},"value":["0.9.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["components"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["tag-require.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["bslib"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.9.0"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["selectize"]},{"type":"character","attributes":{},"value":["0.15.2"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www/shared/selectize"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["js/selectize.min.js","accessibility/js/selectize-plugin-a11y.min.js"]},{"type":"character","attributes":{},"value":["css/selectize.bootstrap3.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["shiny"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["1.11.1"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ionrangeslider-javascript"]},{"type":"character","attributes":{},"value":["2.3.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www/shared/ionrangeslider"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["js/ion.rangeSlider.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["shiny"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["1.11.1"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["strftime"]},{"type":"character","attributes":{},"value":["0.9.2"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www/shared/strftime"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["strftime-min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["shiny"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["1.11.1"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ionrangeslider-css"]},{"type":"character","attributes":{},"value":["2.3.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www/shared/ionrangeslider"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["css/ion.rangeSlider.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["shiny"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["1.11.1"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmltools-fill"]},{"type":"character","attributes":{},"value":["0.5.8.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["fill"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["fill.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmltools"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.5.8.1"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets"]},{"type":"character","attributes":{},"value":["1.6.4"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmlwidgets.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmlwidgets"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["1.6.4"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["jquery"]},{"type":"character","attributes":{},"value":["3.6.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lib/3.6.0"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["jquery-3.6.0.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["jquerylib"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.1.4"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["leaflet"]},{"type":"character","attributes":{},"value":["1.3.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets/lib/leaflet"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["leaflet.js"]},{"type":"character","attributes":{},"value":["leaflet.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["leaflet"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["2.2.3"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["leafletfix"]},{"type":"character","attributes":{},"value":["1.0.0"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets/lib/leafletfix"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["leafletfix.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["leaflet"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["2.2.3"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["proj4"]},{"type":"character","attributes":{},"value":["2.6.2"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets/plugins/Proj4Leaflet"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["proj4.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["leaflet"]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["2.2.3"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["Proj4Leaflet"]},{"type":"character","attributes":{},"value":["1.0.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets/plugins/Proj4Leaflet"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["proj4leaflet.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["leaflet"]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["2.2.3"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["rstudio_leaflet"]},{"type":"character","attributes":{},"value":["1.3.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets/lib/rstudio_leaflet"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["rstudio_leaflet.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["leaflet"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["2.2.3"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["leaflet-binding"]},{"type":"character","attributes":{},"value":["2.2.3"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets/assets"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["leaflet.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["leaflet"]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["2.2.3"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["selectize"]},{"type":"character","attributes":{},"value":["0.15.2"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www/shared/selectize"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["js/selectize.min.js","accessibility/js/selectize-plugin-a11y.min.js"]},{"type":"character","attributes":{},"value":["css/selectize.bootstrap3.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["shiny"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["1.11.1"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmltools-fill"]},{"type":"character","attributes":{},"value":["0.5.8.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["fill"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["fill.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmltools"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.5.8.1"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["kePrint"]},{"type":"character","attributes":{},"value":["0.0.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["kePrint-0.0.1"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["kePrint.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["kableExtra"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["1.4.0"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["lightable"]},{"type":"character","attributes":{},"value":["0.0.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["lightable-0.0.1"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["lightable.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["kableExtra"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["1.4.0"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["selectize"]},{"type":"character","attributes":{},"value":["0.15.2"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www/shared/selectize"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["js/selectize.min.js","accessibility/js/selectize-plugin-a11y.min.js"]},{"type":"character","attributes":{},"value":["css/selectize.bootstrap3.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["shiny"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["1.11.1"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmltools-fill"]},{"type":"character","attributes":{},"value":["0.5.8.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["fill"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["fill.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmltools"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.5.8.1"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets"]},{"type":"character","attributes":{},"value":["1.6.4"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmlwidgets.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmlwidgets"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["1.6.4"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ggiraphjs"]},{"type":"character","attributes":{},"value":["0.9.2"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["girafe.js"]},{"type":"character","attributes":{},"value":["girafe.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["ggiraph"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.9.2"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["girafe-binding"]},{"type":"character","attributes":{},"value":["0.9.2"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["htmlwidgets"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["girafe.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["ggiraph"]},{"type":"logical","attributes":{},"value":[false]},{"type":"character","attributes":{},"value":["0.9.2"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["selectize"]},{"type":"character","attributes":{},"value":["0.15.2"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www/shared/selectize"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["js/selectize.min.js","accessibility/js/selectize-plugin-a11y.min.js"]},{"type":"character","attributes":{},"value":["css/selectize.bootstrap3.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["shiny"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["1.11.1"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ionrangeslider-javascript"]},{"type":"character","attributes":{},"value":["2.3.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www/shared/ionrangeslider"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["js/ion.rangeSlider.min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["shiny"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["1.11.1"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["strftime"]},{"type":"character","attributes":{},"value":["0.9.2"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www/shared/strftime"]}]},{"type":"NULL"},{"type":"character","attributes":{},"value":["strftime-min.js"]},{"type":"NULL"},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["shiny"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["1.11.1"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["ionrangeslider-css"]},{"type":"character","attributes":{},"value":["2.3.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["www/shared/ionrangeslider"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["css/ion.rangeSlider.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["shiny"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["1.11.1"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmltools-fill"]},{"type":"character","attributes":{},"value":["0.5.8.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["fill"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["fill.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmltools"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.5.8.1"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmltools-fill"]},{"type":"character","attributes":{},"value":["0.5.8.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["fill"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["fill.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmltools"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.5.8.1"]}]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["name","version","src","meta","script","stylesheet","head","attachment","package","all_files","pkgVersion"]},"class":{"type":"character","attributes":{},"value":["html_dependency"]}},"value":[{"type":"character","attributes":{},"value":["htmltools-fill"]},{"type":"character","attributes":{},"value":["0.5.8.1"]},{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["file"]}},"value":[{"type":"character","attributes":{},"value":["fill"]}]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["fill.css"]},{"type":"NULL"},{"type":"NULL"},{"type":"character","attributes":{},"value":["htmltools"]},{"type":"logical","attributes":{},"value":[true]},{"type":"character","attributes":{},"value":["0.5.8.1"]}]}]}
+</script>
+<!--/html_preserve-->
+<!--html_preserve-->
+<script type="application/shiny-prerendered" data-context="execution_dependencies">
+{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages"]}},"value":[{"type":"list","attributes":{"names":{"type":"character","attributes":{},"value":["packages","version"]},"class":{"type":"character","attributes":{},"value":["data.frame"]},"row.names":{"type":"integer","attributes":{},"value":[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60,61,62,63,64,65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80,81,82,83,84,85,86,87,88,89,90,91,92,93,94,95,96,97,98,99,100,101,102,103,104,105,106,107,108,109,110]}},"value":[{"type":"character","attributes":{},"value":["base","bit","bit64","bsicons","bslib","cachem","class","classInt","cli","compiler","crayon","crosstalk","datasets","DBI","digest","dplyr","DT","e1071","evaluate","farver","fastmap","flexdashboard","fontawesome","fontBitstreamVera","fontLiberation","fontquiver","forcats","gdtools","generics","ggiraph","ggplot2","glue","graphics","grDevices","grid","gtable","here","hms","htmltools","htmlwidgets","httpuv","httr","janeaustenr","jquerylib","jsonlite","kableExtra","KernSmooth","knitr","later","lattice","leaflet","lifecycle","lubridate","magrittr","Matrix","memoise","methods","mime","parallel","pillar","pkgconfig","processx","promises","proxy","ps","purrr","quarto","R6","rappdirs","RColorBrewer","Rcpp","readr","rlang","rmarkdown","rprojroot","rsconnect","rstudioapi","S7","sass","scales","sf","shiny","SnowballC","stats","stringi","stringr","svglite","systemfonts","textshaping","tibble","tidyr","tidyselect","tidytext","tidyverse","tigris","timechange","tokenizers","tools","tzdb","units","utils","uuid","vctrs","viridisLite","vroom","withr","xfun","xml2","xtable","yaml"]},{"type":"character","attributes":{},"value":["4.5.1","4.6.0","4.6.0-1","0.1.2","0.9.0","1.1.0","7.3-23","0.4-11","3.6.5","4.5.1","1.5.3","1.2.2","4.5.1","1.2.3","0.6.37","1.1.4","0.34.0","1.7-16","1.0.5","2.1.2","1.2.0","0.6.2","0.5.3","0.1.1","0.1.0","0.2.1","1.0.1","0.4.4","0.1.4","0.9.2","4.0.0","1.8.0","4.5.1","4.5.1","4.5.1","0.3.6","1.0.2","1.1.4","0.5.8.1","1.6.4","1.6.16","1.4.7","1.0.0","0.1.4","2.0.0","1.4.0","2.23-26","1.50","1.4.4","0.22-7","2.2.3","1.0.4","1.9.4","2.0.4","1.7-4","2.0.1","4.5.1","0.13","4.5.1","1.11.1","2.0.3","3.8.6","1.3.3","0.4-27","1.9.1","1.1.0","1.5.1","2.6.1","0.3.3","1.1-3","1.1.0","2.1.5","1.1.6","2.30","2.1.1","1.6.2","0.17.1","0.2.0","0.4.10","1.4.0","1.0-23","1.11.1","0.7.1","4.5.1","1.8.7","1.5.2","2.2.1","1.3.1","1.0.4","3.3.0","1.3.1","1.2.1","0.4.3","2.0.0","2.2.1","0.3.0","0.3.0","4.5.1","0.5.0","1.0-0","4.5.1","1.2-1","0.6.5","0.4.2","1.6.6","3.0.2","0.53","1.4.0","1.8-4","2.3.10"]}]}]}
+</script>
+<!--/html_preserve-->
+
+
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /container fluid -->
+
+<script type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (_event) {
+  if (window.bslib.Card) {
+    window.bslib.Card.initializeAllCards();
+  }
+}); 
+</script>
+  
+
+
+
+</body></html>

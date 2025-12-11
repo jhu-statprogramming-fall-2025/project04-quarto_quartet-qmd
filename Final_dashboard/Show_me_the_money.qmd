@@ -1,0 +1,1335 @@
+---
+title: "Show Me the Money! A Roadmap to Biomedical Grants"
+author: "Quarto_quartet.qmd"
+format: 
+    dashboard:
+        scrolling: true
+server: shiny
+---
+
+```{css, echo=FALSE}
+/* 1. Main Container for the Right Side */
+.vertical-stack-container {
+display: flex;
+flex-direction: column; /* Stack items Top-to-Bottom */
+gap: 20px; /* Space between Top and Bottom card */
+height: 95vh; /* Use full viewport height */
+padding-bottom: 20px;
+}
+
+/* 2. Individual Card Styling */
+.heatmap-card {
+background-color: #ffffff;
+border: 1px solid #e3e3e3;
+border-radius: 8px;
+box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+padding: 15px;
+
+/* Flex settings: Grow to fill 50% of height each */
+flex: 1;
+display: flex; /* Flex inside the card to organize Title vs Plot */
+flex-direction: column;
+min-height: 0; /* Crucial for scrolling inside flex items if needed */
+}
+
+/* 3. Header Styling */
+.heatmap-card h4 {
+margin-top: 0;
+margin-bottom: 10px;
+font-weight: 600;
+color: #444;
+border-bottom: 2px solid #f0f0f0;
+padding-bottom: 5px;
+flex-shrink: 0; /* Keep header strictly sizing to content */
+}
+
+/* 4. Ensure Girafe fills the remaining card space */
+.girafe-container {
+flex-grow: 1;
+height: 100%; 
+width: 100%;
+position: relative;
+}
+.girafe_container_std {
+width: 100%;
+height: 100%;
+}
+
+```
+
+```{r}
+#| context: setup
+#| echo: false
+
+library(rsconnect)
+library(shiny)
+library(tidyverse)
+library(leaflet)
+library(bslib)
+library(bsicons)
+library(fontawesome)
+library(quarto)
+library(lubridate)
+library(sf)
+library(tigris)
+library(knitr)
+library(here)
+library(ggiraph)
+library(scales)
+library(flexdashboard)
+library(tidytext)
+library(tibble)
+library(DT)
+library(readr)
+
+## Load data 
+merged_data = readRDS(here("data/merged_data.rds"))
+data_dictionary = read_csv(here('data/data_dictionary.csv'))
+
+## Setup for Page 1
+#| context: setup
+
+# Data preparation for merged data happen here 
+# Precompute some summaries data from our dataset for the plots
+amount_summary <- merged_data %>%
+  filter(Source %in% c("NIH", "NSF"),
+         Notification_year >= 2021,
+         Notification_year <= 2025) %>%
+  group_by(Notification_year, Source) %>%
+  summarise(
+    total_award = sum(Award_amount, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+count_summary <- merged_data %>%
+  filter(Source %in% c("NIH", "NSF"),
+         Notification_year >= 2021,
+         Notification_year <= 2025) %>%
+  group_by(Notification_year, Source) %>%
+  summarise(
+    n_awards = n(),
+    .groups = "drop"
+  )
+
+## Setup for Page 2
+# Table for funding by notification year
+
+summary_table <- merged_data %>%
+  filter(
+    Source %in% c("NIH", "NSF"),
+    Notification_year != 2020,
+    Notification_year != 2026
+  ) %>%
+  group_by(Notification_year, Source) %>%
+  summarise(
+    total_award_amount = sum(Award_amount, na.rm = TRUE),
+    count = n(),
+    .groups = "drop"
+  ) %>%
+  pivot_wider(
+    names_from = Source,
+    values_from = c(count, total_award_amount)
+  ) %>%
+  mutate(Total = coalesce(count_NIH, 0) + coalesce(count_NSF, 0)) %>%
+  mutate(
+    Total_award_amount = coalesce(total_award_amount_NIH, 0) +
+      coalesce(total_award_amount_NSF, 0)
+  ) %>%
+  arrange(Notification_year) %>%
+  select(
+    Year = Notification_year,
+    "# NIH Awards" = count_NIH,
+    "Total NIH Awards ($)" = total_award_amount_NIH,
+    "# NSF Awards" = count_NSF,
+    "Total NSF Awards ($)" = total_award_amount_NSF,
+    "Combined # Awards" = Total,
+    "Combined Awards ($)" = Total_award_amount
+  ) %>%
+  arrange(Year)
+
+funding2025 = summary_table %>%
+  filter(Year == 2025) %>%
+  select("Combined Awards ($)") %>%
+  pull()
+
+funding2025billions = funding2025 / 1e9
+funding2025billions_format = scales::dollar(
+  funding2025billions,
+  prefix = "$",
+  suffix = "B",
+  accuracy = 0.01
+)
+
+# Number of awards table
+award2025 = summary_table %>%
+  filter(Year == 2025) %>%
+  select("Combined # Awards") %>%
+  pull()
+
+# Yearly Funding Amount and Number of Awards Percent Reduction
+summary_data <- merged_data %>%
+  filter(
+    Source %in% c("NIH", "NSF"),
+    Notification_year >= 2021,
+    Notification_year <= 2025
+  ) %>%
+  group_by(Notification_year, Source) %>%
+  summarise(
+    total_amount = sum(Award_amount, na.rm = TRUE),
+    count_awards = n(),
+    .groups = "drop"
+  )
+
+summary_total <- summary_data %>%
+  group_by(Notification_year) %>%
+  summarise(
+    total_amount = sum(total_amount),
+    total_awards = sum(count_awards)
+  ) %>%
+  arrange(Notification_year)
+
+summary_pct <- summary_total %>%
+  arrange(Notification_year) %>%
+  mutate(
+    pct_change_funding_amount = (total_amount - lag(total_amount)) /
+      lag(total_amount) * 100,
+    pct_change_number_of_awards = (total_awards - lag(total_awards)) /
+      lag(total_awards) * 100
+  )
+
+pct_2021_2025_funding_amount <-
+  (summary_total$total_amount[summary_total$Notification_year == 2025] -
+    summary_total$total_amount[summary_total$Notification_year == 2021]) /
+  summary_total$total_amount[summary_total$Notification_year == 2021] * 100
+
+pct_2021_2025_number_of_awards <-
+  (summary_total$total_awards[summary_total$Notification_year == 2025] -
+    summary_total$total_awards[summary_total$Notification_year == 2021]) /
+  summary_total$total_awards[summary_total$Notification_year == 2021] * 100
+
+# Funding Distribution Map by State
+
+state_funding = merged_data %>%
+  filter(Source %in% c("NIH", "NSF")) %>%
+  group_by(Organization_state, Source, Notification_year) %>%
+  summarise(
+    total_funding = sum(Award_amount, na.rm = TRUE),
+    .groups = "drop"
+  )
+
+combined_state_funding = state_funding %>%
+  filter(Source %in% c("NIH", "NSF")) %>%
+  group_by(Organization_state, Notification_year) %>%
+  summarise(
+    total_funding = sum(total_funding, na.rm = TRUE),
+    Source = "Combined",
+    .groups = "drop"
+  )
+
+final_state_funding = bind_rows(state_funding, combined_state_funding)
+
+state_lookup <- data.frame(
+  abbr = c(
+    "AL","AK","AS","AZ","AR","CA","CO","CT","DC","DE","FL","GA","HI","ID","IL",
+    "IN","IA","KS","KY","LA","ME","MD","MA","MI","MN","MS","MO","MT","NE","NV",
+    "NH","NJ","NM","NY","NC","ND","OH","OK","OR","PA","RI","SC","SD","TN","TX",
+    "UT","VT","VA","WA","WV","WI","WY"
+  ),
+  full_name = c(
+    "Alabama","Alaska","American Samoa","Arizona","Arkansas","California",
+    "Colorado","Connecticut","District of Columbia","Delaware","Florida",
+    "Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky",
+    "Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota",
+    "Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire",
+    "New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio",
+    "Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina",
+    "South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington",
+    "West Virginia","Wisconsin","Wyoming"
+  ),
+  stringsAsFactors = FALSE
+)
+
+# Funding agency choices
+fundingagency = sort(unique(merged_data$Funding_organization))
+
+
+# --- CONSTANTS ---
+AWARD_COL  <- "Award_amount"
+YEAR_COL   <- "Notification_year"
+SOURCE_COL <- "Source"
+
+# --- HELPER: ROBUST LIMITS ---
+# Calculates plot limits while ignoring outliers and handling all-NA cases
+get_robust_limits <- function(vals, metric) {
+  # Remove NAs and Infinite values
+  clean_vals <- vals[is.finite(vals)]
+  
+  # If no data, return default 0-1 range to prevent crash
+  if (length(clean_vals) == 0) return(c(0, 1))
+  
+  if (metric == "change_mean_2021") {
+    # Clamp percentage changes to +/- 100% (i.e., -1.0 to 1.0)
+    # This prevents extreme outliers (e.g. +5000% increase) from washing out the color scale
+    return(c(-1, 1))
+  } else {
+    # For dollar amounts, use 5th and 95th percentiles to ignore extremes
+    lims <- quantile(clean_vals, probs = c(0.05, 0.95), na.rm = TRUE)
+    
+    # If limits are identical (e.g. all 0), expand slightly to avoid scale error
+    if (lims[1] == lims[2]) {
+      return(c(lims[1] - 1, lims[2] + 1))
+    }
+    return(lims)
+  }
+}
+
+# --- HELPER: MIDPOINT ---
+get_midpoint <- function(vals, metric) {
+  if (metric == "change_mean_2021") {
+    return(0) # Change metric is always centered at 0% (White)
+  } else {
+    clean_vals <- vals[is.finite(vals)]
+    if(length(clean_vals) == 0) return(0)
+    return(median(clean_vals, na.rm = TRUE)) # Median is safer than Mean for skewed money data
+  }
+}
+
+
+# 1) read in preprocessed bigram data
+bigrams_year <- readRDS(here('data/words_year_small.rds'))
+
+# 2) combine across years
+bigrams_all <- bigrams_year %>%
+  group_by(Source, field, bigram) %>%
+  summarise(n = sum(n), .groups = "drop")
+
+# 3) create field choices: Abstract or Title (or both)
+has_title    <- "Title" %in% bigrams_year$field
+has_abstract <- "Abstract_clean" %in% bigrams_year$field
+
+field_choices <- c()
+if (has_title) {
+  field_choices["Title"]    <- "Title"
+}
+if (has_abstract) {
+  field_choices["Abstract"] <- "Abstract_clean"
+}
+
+# 4) source: NIH, NSF
+source_choices <- sort(unique(bigrams_year$Source))
+
+# 5) year range
+year_min <- min(bigrams_year$Year, na.rm = TRUE)
+year_max <- max(bigrams_year$Year, na.rm = TRUE)
+
+# 6) buzzword catalog
+buzz_catalog <- tribble(
+  ~bigram,               ~set,          ~theme,
+  # 1) Science / mechanism
+  "single cell",         "science",     "mechanism",
+  "cell types",          "science",     "mechanism",
+  "gene expression",     "science",     "mechanism",
+  "stem cells",          "science",     "model",
+  "mouse models",        "science",     "model",
+  "animal models",       "science",     "model",
+  "molecular mechanisms","science",     "mechanism",
+  "immune responses",    "science",     "immune",
+  "breast cancer",       "science",     "disease",
+  "alzheimers disease",  "science",     "disease",
+  "sars cov",            "science",     "disease",
+
+  # 2) Training / infrastructure (NSF-style language)
+  "graduate students",       "training", "students",
+  "graduate student",        "training", "students",
+  "undergraduate students",  "training", "students",
+  "school students",         "training", "students",
+  "synthetic biology",       "training", "discipline",
+  "cellular biosciences",    "training", "discipline",
+  "biological sciences",     "training", "discipline",
+  "effective infrastructure","training", "infrastructure",
+  "data collection",         "training", "data",
+
+  # 3) Narrative / boilerplate / policy
+  "preliminary data",    "narrative", "grant_narrative",
+  "term goal",           "narrative", "grant_narrative",
+  "central hypothesis",  "narrative", "grant_narrative",
+  "broader impacts",     "narrative", "review_criteria",
+  "cutting edge",        "narrative", "hype",
+  "mechanisms underlying","narrative","grant_narrative",
+  "poorly understood",   "narrative", "hype",
+  "real time",           "narrative", "methods",
+  "rescue plan",         "narrative", "policy_program",
+  "american rescue",     "narrative", "policy_program",
+  "wide range",          "narrative", "hype"
+)
+
+# 7) buzzword sets
+buzz_sets <- sort(unique(buzz_catalog$set))
+
+```
+
+# Introduction 
+## Column {height=300px}
+
+::: {.card title="Show Me the Money! A Roadmap to Biomedical Grants"}
+In a period marked by tightening research budgets, this dashboard combines data from both the NIH and NSF to provide a snapshot of the biomedical funding landscape from 2021 to 2025.
+
+The dashboard features an interactive map that allows users to examine funding patterns by state, as well as plots by agency and grant type. Additional text analysis highlights emerging research topics and keywords, helping users identify areas of growing scientific interest.
+
+This platform is designed for students, junior faculty, and researchers who want easy access to aggregated funding data from major federal agencies. Our goal is to provide a practical, accessible resource for navigating the biomedical grants landscape.
+:::
+
+## Funding Trends {.tabset}
+### Award Amount
+```{r}
+#| title: "Award Amount"
+plotOutput("intro_amount_plot", height = "450px")
+```
+
+### Number of Awards
+```{r}
+#| title: "Number of Awards"
+plotOutput("intro_count_plot", height = "450px")
+
+```
+
+```{r}
+#| context: server
+
+# Tab 1 Output: Award Amount plot
+output$intro_amount_plot <- renderPlot({
+  
+  ggplot(amount_summary,
+         aes(x = Notification_year,
+             y = total_award,
+             color = Source,
+             group = Source)) +
+    geom_line(size = 1.3) +
+    geom_point(size = 3) +
+    geom_text(
+      aes(label = paste0(round(total_award / 1e9, 2), "B")),
+      vjust = -0.8,
+      size  = 4,
+      fontface = "bold", 
+      color = "black",
+      show.legend = FALSE
+    ) +
+    facet_wrap(~ Source, ncol = 1, scales = "free_y") +
+    scale_y_continuous(
+      labels = scales::label_dollar(scale = 1e-9, suffix = "B"),
+      expand = expansion(mult = c(0.05, 0.20))
+    ) +
+    labs(
+      title = "Total Award Amount by Year (NIH vs NSF)",
+      x = "Award Notice Year",
+      y = "Total Award Amount (Billion $)"
+    ) +
+    theme_minimal(base_size = 14) +
+    theme(
+      legend.position = "none",
+      strip.text = element_text(size = 13, face = "bold"),
+      plot.margin = margin(20, 20, 20, 20)
+    )
+})
+
+# Tab 2 Output: Number of Awards plot 
+output$intro_count_plot <- renderPlot({
+  
+  ggplot(count_summary,
+         aes(x = Notification_year,
+             y = n_awards,
+             color = Source,
+             group = Source)) +
+    geom_line(size = 1.3) +
+    geom_point(size = 3) +
+    geom_text(
+      aes(label = scales::comma(n_awards)),
+      vjust = -1.2,
+      size  = 4,
+      fontface = "bold",
+      color = "black",
+      show.legend = FALSE
+    ) +
+    facet_wrap(~ Source, ncol = 1, scales = "free_y") +
+    scale_y_continuous(
+      labels = scales::comma,
+      expand = expansion(mult = c(0.05, 0.25))
+    ) +
+    labs(
+      title = "Number of Awards by Year (NIH vs NSF)",
+      x = "Award Notice Year",
+      y = "Number of Awards"
+    ) +
+    theme_minimal(base_size = 14) +
+    theme(
+      legend.position = "none",
+      strip.text = element_text(size = 13, face = "bold"),
+      plot.margin = margin(20, 20, 20, 20)
+    )
+})
+
+```
+
+## Column {height=200px}
+
+::: {.card title="Funding Data Summary"}
+
+This dataset compiles all NIH and NSF award records from 2021 through December 1, 2025. It includes key information such as project titles, funding amounts, award dates, and participating institutions. For transparency and reproducibility, our raw data and scripts are available in our project's GitHub repository.
+GitHub Repository: [View Project Repository](https://github.com/lindaye-md/jhu-biostat777-project-4.git)
+
+:::
+
+## Funding Data
+```{r}
+#| title = "Funding Data Preview"
+DTOutput("data_preview")
+```
+
+## Data Dictionary 
+```{r}
+#| title = "Data Dictionary"
+DTOutput("data_dictionary")
+```
+
+```{r}
+#| context: server
+# Tab 2 output: Data table
+
+output$data_preview <- renderDataTable({
+
+  df_display <- merged_data   # keep EVERYTHING
+
+
+  pretty_names <- c(
+    Funding_organization = "Funding organization",
+    Organization_name    = "Organization name",
+    Organization_city    = "Organization city",
+    Organization_state   = "Organization state",
+    Start_date           = "Start date",
+    End_date             = "End date",
+    Award_amount         = "Award amount",
+    Notification_date    = "Notification date",
+    Notification_year    = "Notification year",
+    Abstract             = "Project summary"
+  )
+
+
+  final_colnames <- ifelse(
+    names(df_display) %in% names(pretty_names),
+    pretty_names[names(df_display)],
+    names(df_display) 
+  )
+
+  DT::datatable(
+    df_display,
+    colnames = final_colnames,
+    options = list(
+      pageLength = 10,
+      autoWidth  = TRUE,
+      scrollX    = TRUE,
+
+      columnDefs = list(
+        list(
+          targets = which(names(df_display) == "Abstract") - 1,  # convert to 0-based index
+          render = DT::JS(
+            "function(data, type, row, meta) {",
+            "  if (type === 'display' && data != null) {",
+            "    var short = data.length > 120 ? data.substr(0, 120) + '…' : data;",
+            "    var safeFull = data.replace(/\"/g, '&quot;');",
+            "    return '<span title=\"' + safeFull + '\">' + short + '</span>';",
+            "  }",
+            "  return data;",
+            "}"
+          )
+        )
+      )
+    ),
+    rownames = FALSE,
+    escape   = FALSE
+  )
+})
+
+
+# Tab2 Output: Data dictionary table
+output$data_dictionary <- renderDataTable({
+
+  df_dict <- data_dictionary   
+
+
+  pretty_names <- c(
+    Composite_Variable_Name = "Composite variable name",
+    Variable_Type           = "Variable type"
+  )
+
+ 
+  final_colnames <- ifelse(
+    names(df_dict) %in% names(pretty_names),
+    pretty_names[names(df_dict)],
+    names(df_dict)
+  )
+
+  DT::datatable(
+    df_dict,
+    colnames = final_colnames,
+    options = list(
+      pageLength = 10,
+      autoWidth  = TRUE,
+      scrollX    = TRUE
+    ),
+    rownames = FALSE
+  )
+})
+```
+
+# Funding breakdown {orientation="columns"}
+
+## margin stats {width=20%}
+
+**2025 Statistics**\n
+
+```{r}
+#| classes: my-valuebox
+value_box(
+  title = tags$p("Change in Funding $ Since 2021", style = "font-size: 12px;"),
+  value = tags$p(
+    paste0(round(pct_2021_2025_funding_amount, 2), "%"),
+    style = "font-size: 16px;"
+  ),
+  theme = value_box_theme(bg = "#D15030", fg = "#FFFFFF"),
+  showcase = bsicons::bs_icon(
+    "graph-down-arrow",
+    size = '30px',
+    style = 'margin: 0;'
+  ),
+  showcase_layout = "left center",
+  full_screen = FALSE,
+  fill = FALSE,
+  height = NULL
+)
+```
+
+```{r}
+value_box(
+  title = tags$p(
+    "Change in # Awards Funded Since 2021",
+    style = "font-size: 12px; margin: 0;"
+  ),
+  value = tags$p(
+    paste0(round(pct_2021_2025_number_of_awards, 2), "%"),
+    style = "font-size: 16px; margin: 0;"
+  ),
+  theme = value_box_theme(bg = "#840e0eff", fg = "#FFFFFF"),
+  showcase = bsicons::bs_icon("graph-down-arrow", size = '30px'),
+  showcase_layout = "left center",
+  full_screen = FALSE,
+  fill = FALSE,
+  height = NULL
+)
+
+```
+
+```{r}
+value_box(
+  title = tags$p("Total $ Funded in 2025", style = "font-size: 12px;"),
+  value = tags$p(funding2025billions_format, style = "font-size: 16px;"),
+  theme = value_box_theme(bg = "#289672ff", fg = "#FFFFFF"),
+  showcase = fontawesome::fa_i(
+    "money-check-dollar",
+    style = "font-size: 30px;"
+  ),
+  showcase_layout = "left center",
+  full_screen = FALSE,
+  fill = FALSE,
+  height = NULL
+)
+
+```
+
+```{r}
+value_box(
+  title = tags$p("Total New & Renewed* Awards", style = "font-size: 12px;"),
+  value = tags$p(scales::comma(award2025), style = "font-size: 16px;"),
+  tags$p("*Competing renewals", style = "font-size: 8px;"),
+  theme = value_box_theme(bg = "#2c00b0ff", fg = "#FFFFFF"),
+  showcase = fontawesome::fa_i("award", style = "font-size: 30px;"),
+  showcase_layout = "left center",
+  full_screen = FALSE,
+  fill = FALSE,
+  height = NULL
+)
+
+```
+
+## column {width=80%}
+
+### interactive map and histogram {.row height=70%}
+
+```{r}
+# Map controls + output
+fluidRow(
+  column(
+    2,
+    selectInput(
+      "source",
+      "Select Funding Source:",
+      choices = c("NIH", "NSF", "Combined"),
+      selected = "Combined"
+    )
+  ),
+  column(
+    4,
+    sliderInput(
+      "year",
+      "Select Year:",
+      min = 2021,
+      max = 2025,
+      value = 2025,
+      step = 1,
+      sep = "",
+      animate = TRUE
+    )
+  )
+)
+
+leafletOutput("map")
+
+```
+
+```{r}
+# Funding trends controls + output
+selectInput(
+  "Funding_organization",
+  "Select Funding Agency:",
+  choices = fundingagency,
+  selected = "NCI"
+)
+
+plotOutput("histogram")
+
+```
+
+```{r}
+#| context: server
+
+output$map <- renderLeaflet({
+  funding_data_selected <- final_state_funding %>%
+    filter(Source == input$source & Notification_year == input$year) %>%
+    left_join(state_lookup, by = c("Organization_state" = "abbr")) %>%
+    ungroup()
+
+  states <- states(cb = TRUE, resolution = "20m") %>%
+    st_transform(4326)
+
+  amounts <- funding_data_selected$total_funding[match(
+    states$STUSPS,
+    funding_data_selected$Organization_state
+  )]
+
+  pal <- colorNumeric("RdYlBu", domain = final_state_funding$total_funding)
+
+  labels <- ifelse(
+    is.na(amounts),
+    funding_data_selected$full_name[match(
+      states$STUSPS,
+      funding_data_selected$Organization_state
+    )],
+    paste(
+      funding_data_selected$full_name[match(
+        states$STUSPS,
+        funding_data_selected$Organization_state
+      )],
+      ": $",
+      prettyNum(amounts, big.mark = ","),
+      sep = ""
+    )
+  )
+
+  leaflet(data = states) %>%
+    addTiles() %>%
+    setView(lng = -97, lat = 37.5, zoom = 3) %>%
+    addPolygons(
+      fillColor = ~ pal(amounts),
+      color = "#BDBDC3",
+      weight = 1,
+      opacity = 1,
+      fillOpacity = 0.7,
+      highlight = highlightOptions(
+        weight = 2,
+        color = "#666",
+        fillOpacity = 0.7,
+        bringToFront = TRUE
+      ),
+      label = labels,
+      labelOptions = labelOptions(
+        style = list("font-weight" = "bold"),
+        textsize = "15px"
+      )
+    ) %>%
+    addLegend(
+      position = "bottomright",
+      pal = pal,
+      values = funding_data_selected$total_funding,
+      title = "Funding Amounts ($)",
+      labFormat = labelFormat(big.mark = ","),
+      opacity = 0.7
+    )
+})
+
+output$histogram <- renderPlot({
+  agency_data <- merged_data %>%
+    filter(
+      Source %in% c("NIH", "NSF"),
+      Notification_year != 2020,
+      Notification_year != 2026
+    ) %>%
+    filter(Funding_organization == input$Funding_organization) %>%
+    group_by(Notification_year) %>%
+    summarise(total_award = sum(Award_amount, na.rm = TRUE))
+
+  ggplot(
+    agency_data,
+    aes(
+      x = Notification_year,
+      y = total_award,
+      fill = factor(Notification_year)
+    )
+  ) +
+    geom_bar(stat = "identity") +
+    labs(
+      title = paste(
+        "Total Award Amount Over Time for",
+        input$Funding_organization
+      ),
+      x = "Notification Year",
+      y = "Total Award Amount ($)"
+    ) +
+    scale_y_continuous(labels = scales::comma) +
+    scale_x_continuous(
+      breaks = seq(2015, 2025, by = 1),
+      labels = scales::number_format(accuracy = 1)
+    ) +
+    theme_minimal() +
+    theme(legend.position = "none")
+})
+
+
+```
+
+
+### funding summary table {.row height=30%}
+```{r}
+#| title = "Funding Breakdown by Year and Source"
+
+summary_table <- summary_table %>%
+  mutate(
+    `# NIH Awards` = prettyNum(`# NIH Awards`, big.mark = ","),
+    `Total NIH Awards ($)` = prettyNum(`Total NIH Awards ($)`, big.mark = ","),
+    `# NSF Awards` = prettyNum(`# NSF Awards`, big.mark = ","),
+    `Total NSF Awards ($)` = prettyNum(`Total NSF Awards ($)`, big.mark = ","),
+    `Combined # Awards` = prettyNum(`Combined # Awards`, big.mark = ","),
+    `Combined Awards ($)` = prettyNum(`Combined Awards ($)`, big.mark = ",")
+  )
+
+kable(
+  summary_table,
+  format = "html",
+  digits = 0,
+  col.names = c(
+    "Year",
+    "# NIH Awards",
+    "Total NIH Awards ($)",
+    "# NSF Awards",
+    "Total NSF Awards ($)",
+    "Combined # Awards",
+    "Combined Awards ($)"
+  )
+) %>%
+  kableExtra::kable_styling(full_width = FALSE, position = "left")
+
+```
+
+# Interactive heatmap
+
+## {.sidebar}
+
+```{r}
+# 1. Y Axis Selection
+allowed_y <- c("Organization_state", "Funding_organization", "Activity", "Activity Category")
+y_choices <- intersect(allowed_y, names(merged_data))
+selectInput('y_var', 'Y axis column', choices = c('State' = 'Organization_state',
+                                                  'Organization' = 'Funding_organization',
+                                                  'Grant subtypes' = 'Activity',
+                                                  'Grant types' = 'Activity Category'),selected = 'Organization_state')
+
+# 2. Metric Selection
+radioButtons('metric', 'Heatmap color metric',
+             choices = c('Mean award amount'   = 'mean_award',
+                         'Median award amount' = 'median_award',
+                         'Total award amount'  = 'total_award',
+                         'Count of awards'     = 'count_awards',
+                         '%Change in Total Award (vs 2021)' = 'change_total_2021'),
+             selected = 'mean_award')
+
+```
+
+## Column 
+
+```{r}
+tags$div(
+class = "vertical-stack-container",
+
+## --- TOP CARD: NIH ---
+tags$div(class = "heatmap-card",
+h4("NIH Funding"),
+# Wrap output in a div to ensure flex sizing works
+tags$div(class = "girafe-container",
+girafeOutput('heatmap_nih', width = "100%", height = "100%")
+)
+),
+
+## --- BOTTOM CARD: NSF ---
+tags$div(class = "heatmap-card",
+h4("NSF Funding"),
+tags$div(class = "girafe-container",
+girafeOutput('heatmap_nsf', width = "100%", height = "100%")
+)
+)
+)
+
+```
+
+```{r}
+#| context: server
+
+dataset <- reactive({
+  merged_data
+})
+
+states <- c('AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'FL', 'GA',
+            'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD',
+            'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ',
+            'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC',
+            'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY')
+
+summarise_for_source <- function(source_value) {
+  req(input$y_var, input$metric)
+
+  # 1. Filter Data
+  df <- dataset() |>
+    filter(!is.na(.data[[YEAR_COL]])) |>
+    filter(as.character(.data[[YEAR_COL]]) != "2026") |>
+    filter(as.character(.data[[YEAR_COL]]) != "2020") |>
+    filter(.data[[SOURCE_COL]] == source_value) |>
+    filter(Organization_state %in% states)
+
+  if (nrow(df) == 0) {
+    return(tibble(.year_f = factor(), .y_label = factor(),
+                  mean_award = numeric(), median_award = numeric(),
+                  total_award = numeric(), count_awards = integer(),
+                  change_total_2021 = numeric()))
+  }
+
+  year_chr <- as.character(df[[YEAR_COL]])
+  year_levels <- sort(unique(year_chr))
+  
+  y_fac <- as.factor(df[[input$y_var]])
+  y_levels <- levels(y_fac)
+
+  df <- df |>
+    mutate(.year_f = factor(year_chr, levels = year_levels),
+           .y_label = y_fac) |>
+    filter(!is.na(.y_label))
+
+  # 2. Summarise Basic Metrics
+  df_sum <- df |>
+    group_by(.year_f, .y_label) |>
+    summarise(
+      mean_award   = mean(.data[[AWARD_COL]], na.rm = TRUE),
+      median_award = median(.data[[AWARD_COL]], na.rm = TRUE),
+      total_award  = sum(.data[[AWARD_COL]], na.rm = TRUE),
+      count_awards = n(),
+      .groups = "drop"
+    ) |>
+    tidyr::complete(.year_f = year_levels, .y_label = y_levels) |>
+    mutate(count_awards = replace_na(count_awards, 0))
+
+  # 3. Calculate "Change from 2021" (Percentage)
+  df_sum <- df_sum |>
+    group_by(.y_label) |>
+    mutate(
+      base_2021 = {
+        # Safely extract 2021 value. If 2021 is missing or NA, return NA.
+        val <- total_award[.year_f == "2021"]
+        if(length(val) == 0 || all(is.na(val))) NA_real_ else val[1]
+      },
+      # Formula: (Current - Base) / Base
+      change_total_2021 = (total_award - base_2021) / base_2021
+    ) |>
+    ungroup() |>
+    # Convert Infinite values (division by zero) to NA
+    mutate(change_total_2021 = ifelse(is.infinite(change_total_2021), NA_real_, change_total_2021))
+
+  # 4. Sort Y-axis based on 2025 value (Highest at Top)
+  current_metric <- input$metric
+  
+  if ("2025" %in% year_levels) {
+    order_df <- df_sum |>
+      filter(.year_f == "2025") |>
+      select(.y_label, sort_val = .data[[current_metric]]) |>
+      arrange(sort_val) # Ascending sort -> High values at top of Y-axis
+    
+    new_levels <- order_df$.y_label
+    final_levels <- union(new_levels, unique(df_sum$.y_label))
+    
+    df_sum <- df_sum |>
+      mutate(.y_label = factor(.y_label, levels = final_levels))
+  }
+
+  df_sum
+}
+
+plot_heatmap <- function(df_sum, metric_col, metric_lab, x_lab, subtitle_lab) {
+  vals <- df_sum[[metric_col]]
+  
+  # 1. Format String
+  if (metric_col == "change_total_2021") {
+    value_str <- scales::percent(vals, accuracy = 1)
+  } else if (metric_col == "count_awards") {
+    value_str <- scales::comma(vals)
+  } else {
+    value_str <- scales::dollar(vals)
+  }
+  
+  # 2. Color Scaling
+  limit_vals <- get_robust_limits(vals, metric_col)
+  mid_val    <- get_midpoint(vals, metric_col)
+
+  # 3. Tooltips (Updated labels for X=Attribute, Y=Year)
+  df_sum <- df_sum |>
+    mutate(
+      .tooltip = ifelse(
+        is.na(vals),
+        paste0("Year: ", .year_f, "\n", x_lab, ": ", .y_label, "\n", metric_lab, ": No data"),
+        paste0("Year: ", .year_f, "\n", x_lab, ": ", .y_label, "\n", metric_lab, ": ", value_str)
+      ),
+      .data_id = paste0(.year_f, "__", .y_label)
+    )
+
+  # 4. Plot (Swapped Axes: X = Attribute (.y_label), Y = Year (.year_f))
+  p <- ggplot(df_sum, aes(x = .y_label, y = .year_f)) +
+    geom_tile_interactive(aes(fill = .data[[metric_col]],
+                              tooltip = .tooltip,
+                              data_id = .data_id),
+                          color = NA) +
+    scale_fill_gradient2(
+      low = "#B2182B",   
+      mid = "#F7F7F7",   
+      high = "#2166AC",  
+      midpoint = mid_val,
+      limits = limit_vals,
+      oob = scales::squish, 
+      na.value = "grey95"
+    ) +
+    guides(fill = guide_colorbar(title.position = "top", 
+                                 direction = "horizontal",
+                                 barwidth = 20)) +
+    labs(
+      x = NULL, y = NULL, 
+      fill = metric_lab,
+      title = paste("Heatmap of", metric_lab),
+      subtitle = subtitle_lab
+    ) +
+    theme_minimal() +
+    theme(
+      # X-axis is now the Attribute (State/Org), so rotate text 90 deg
+      axis.text.x = element_text(size = 20),
+      # Y-axis is now Year, keep horizontal
+      axis.text.y = element_text(size = 24, face = "bold"),
+      panel.grid = element_blank(),
+      legend.position = "bottom",
+      plot.title = element_text(size = 36, face = "bold", hjust = 0.5),
+      plot.subtitle = element_text(size = 32, color = "grey30", hjust = 0.5),
+      legend.title = element_text(size = 20),
+      legend.text = element_text(size = 16)
+    )
+
+  # 5. Adjusted Dimensions for Wide Layout
+  girafe(ggobj = p, 
+         width_svg = 50, # Made wide to fit many attributes on X
+         height_svg = 8, # Made shorter since Y (Years) is small
+         options = list(
+           opts_sizing(rescale = TRUE, width = 1.0), 
+           opts_hover(css = "opacity:1; stroke:black; stroke-width:2px;"),
+           opts_tooltip(css = "background-color: white; color: black; padding: 8px; border-radius: 4px;")
+         ))
+}
+
+output$heatmap_nih <- renderGirafe({
+  df_sum <- summarise_for_source("NIH")
+  metric_col <- input$metric
+  
+  metric_lab <- switch(metric_col,
+                       mean_award   = "Mean award amount",
+                       median_award = "Median award amount",
+                       total_award  = "Total award amount",
+                       count_awards = "Count of awards",
+                       change_total_2021 = "%Change in Total Award (vs 2021)")
+
+  validate(need(nrow(df_sum) > 0, "No NIH data available."))
+  # Passed Label "X:" instead of "Y:" since we swapped axes
+  plot_heatmap(df_sum, metric_col, metric_lab, paste("Attribute:", input$y_var), "Source: NIH")
+})
+
+output$heatmap_nsf <- renderGirafe({
+  df_sum <- summarise_for_source("NSF")
+  metric_col <- input$metric
+  
+  metric_lab <- switch(metric_col,
+                       mean_award   = "Mean award amount",
+                       median_award = "Median award amount",
+                       total_award  = "Total award amount",
+                       count_awards = "Count of awards",
+                       change_total_2021 = "%Change in Total Award (vs 2021)")
+
+  validate(need(nrow(df_sum) > 0, "No NSF data available."))
+  plot_heatmap(df_sum, metric_col, metric_lab, paste("Attribute:", input$y_var), "Source: NSF")
+})
+
+```
+
+# Text Analysis {orientation="rows"}
+## {.sidebar}
+```{r}
+# Chooese field
+selectInput(
+  "field", "Text field",
+  choices  = field_choices,
+  selected = if ("Abstract_clean" %in% field_choices) "Abstract_clean" else field_choices[1]
+)
+
+# Choose source
+checkboxGroupInput(
+  "source", "Source",
+  choices  = source_choices,
+  selected = source_choices
+)
+
+# Top bigrams by frequency
+numericInput(
+  "top_n_bigrams",
+  "Top N bigrams (by frequency)",
+  value = 15, min = 5, max = 30, step = 1
+)
+
+# log-ratio bigrams
+numericInput(
+  "top_n_lr",
+  "Top N bigrams in log-ratio (per side)",
+  value = 15, min = 5, max = 30, step = 1
+)
+
+# buzzword set（science / training / narrative）
+radioButtons(
+  "buzz_set",
+  "Buzzword set (bigrams in abstracts)",
+  choices  = c("Science-related"   = "science",
+               "Training / infra" = "training",
+               "Narrative / policy" = "narrative"),
+  selected = "science"
+)
+
+# year range for buzzword trends
+sliderInput(
+  "year_range",
+  "Year range (buzzword trends)",
+  min   = year_min, max = year_max,
+  value = c(year_min, year_max),
+  sep   = ""
+)
+```
+
+## Row {height = 50%}
+### Top words by source
+```{r}
+plotOutput('top_bigrams_plot')
+```
+
+```{r}
+#| context: server
+
+output$top_bigrams_plot <- renderPlot({
+  req(input$field, input$source)
+
+  df <- bigrams_all %>%
+    filter(
+      field  == input$field,
+      Source %in% input$source
+    ) %>%
+    group_by(Source) %>%
+    mutate(
+      total = sum(n),
+      freq  = n / total
+    ) %>%
+    slice_max(freq, n = input$top_n_bigrams, with_ties = FALSE) %>%
+    ungroup() %>%
+    mutate(bigram = tidytext::reorder_within(bigram, freq, Source))
+
+  validate(
+    need(nrow(df) > 0,
+         "No bigrams after filtering — try changing field / source / Top N.")
+  )
+
+  ggplot(df, aes(x = bigram, y = freq)) +
+    geom_col() +
+    facet_wrap(~ Source, scales = "free_y") +
+    coord_flip() +
+    tidytext::scale_x_reordered() +
+    scale_y_continuous(labels = percent_format(accuracy = 0.01)) +
+    labs(
+      title = paste(
+        "Top", input$top_n_bigrams,
+        "bigrams in", ifelse(input$field == "Abstract_clean", "Abstracts", input$field),
+        "by source (relative frequency)"
+      ),
+      x = NULL,
+      y = "Proportion of bigrams"
+    )
+})
+
+```
+
+### Signature bigrams: log2(freq_NIH / freq_NSF)
+```{r}
+plotOutput('logratio_plot')
+```
+
+```{r}
+#| context: server
+output$logratio_plot <- renderPlot({
+  req(input$field)
+
+  eps <- 1e-7
+
+  # 只用 NIH & NSF，同时跨年份合并（bigrams_all）
+  freq <- bigrams_all %>%
+    filter(
+      field  == input$field,
+      Source %in% c("NIH", "NSF")
+    ) %>%
+    group_by(Source) %>%
+    mutate(
+      total = sum(n),
+      freq  = n / total
+    ) %>%
+    ungroup() %>%
+    select(Source, bigram, freq) %>%
+    tidyr::pivot_wider(
+      names_from  = Source,
+      values_from = freq,
+      values_fill = 0
+    )
+
+  # 如果缺少 NIH 或 NSF，就没法算 log-ratio
+  if (!("NIH" %in% names(freq) && "NSF" %in% names(freq))) {
+    validate(need(FALSE, "Need both NIH and NSF to compute log-ratio."))
+  }
+
+  bigram_lr <- freq %>%
+    mutate(
+      log_ratio = log2((NIH + eps) / (NSF + eps)),
+      max_freq  = pmax(NIH, NSF)
+    ) %>%
+    # 丢掉极低频 bigrams
+    filter(max_freq > 1e-6)
+
+  nih_pref <- bigram_lr %>%
+    arrange(desc(log_ratio)) %>%
+    slice_head(n = input$top_n_lr) %>%
+    mutate(pref = "More NIH")
+
+  nsf_pref <- bigram_lr %>%
+    arrange(log_ratio) %>%
+    slice_head(n = input$top_n_lr) %>%
+    mutate(pref = "More NSF")
+
+  plot_dat <- bind_rows(nih_pref, nsf_pref) %>%
+    mutate(bigram = reorder(bigram, log_ratio))
+
+  validate(
+    need(nrow(plot_dat) > 0,
+         "Not enough overlapping bigrams between NIH and NSF to compute log-ratio.")
+  )
+
+  ggplot(plot_dat, aes(x = bigram, y = log_ratio, fill = pref)) +
+    geom_col() +
+    coord_flip() +
+    geom_hline(yintercept = 0, linetype = "dashed") +
+    labs(
+      title = paste0(
+        "Bigrams characteristic of NIH vs NSF (",
+        ifelse(input$field == "Abstract_clean", "Abstracts", input$field),
+        ")"
+      ),
+      x = NULL,
+      y = "log2(freq_NIH / freq_NSF)"
+    )
+})
+```
+
+## Row {height = 50%}
+### Buzzword single in abstracts over time
+```{r}
+plotOutput('buzzword_trends_plot')
+```
+
+```{r}
+#| context: server
+output$buzzword_trends_plot <- renderPlot({
+  req(input$year_range, input$buzz_set)
+
+  # 1) 当前选中的 buzzword bigrams
+  buzz_vec <- buzz_catalog %>%
+    filter(set == input$buzz_set) %>%
+    pull(bigram)
+
+  # 2) 年份范围内，Abstract_clean + 这些 bigrams
+  trend_df <- bigrams_year %>%
+    filter(
+      field == "Abstract_clean",
+      Year >= input$year_range[1],
+      Year <= input$year_range[2],
+      bigram %in% buzz_vec
+    ) %>%
+    group_by(Source, Year) %>%
+    mutate(total = sum(n)) %>%
+    ungroup() %>%
+    mutate(freq = n / total) %>%
+    group_by(bigram) %>%
+    filter(any(freq > 0)) %>%
+    ungroup()
+
+  validate(
+    need(nrow(trend_df) > 0,
+         "No buzzword bigrams in abstracts for this set / year range.")
+  )
+
+  set_label <- dplyr::case_when(
+    input$buzz_set == "science"   ~ "Science-related",
+    input$buzz_set == "training"  ~ "Training / infrastructure",
+    input$buzz_set == "narrative" ~ "Narrative / policy",
+    TRUE ~ input$buzz_set
+  )
+
+  ggplot(trend_df, aes(x = Year, y = freq, color = Source, group = Source)) +
+    geom_line() +
+    geom_point() +
+    facet_wrap(~ bigram, scales = "free_y") +
+    scale_y_continuous(labels = percent_format(accuracy = 0.01)) +
+    scale_x_continuous(breaks = seq(input$year_range[1], input$year_range[2])) +
+    labs(
+      title = paste("Trends of", set_label, "bigrams in abstracts"),
+      x = "Fiscal year",
+      y = "Proportion of all bigrams (within Source × Year × field)"
+    )
+})
+```
