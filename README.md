@@ -7,7 +7,7 @@ Our goal is to provide a clear and accessible resource that helps students, rese
 
 ### Team Members
 This project is created and maintained by:
-- Lo-yu Zhang
+- Lo Yu Chang
 - Linda Ye
 - Ding Ding
 - Hui Yao
