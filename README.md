@@ -7,7 +7,22 @@ Our goal is to provide a clear and accessible resource that helps students, rese
 
 ### Team Members
 This project is created and maintained by:
-- Lo Yu Chang
-- Linda Ye
-- Ding Ding
-- Hui Yao
+- [Lo-Yu Chang](https://github.com/loyuchang)
+- [Linda Ye](https://github.com/lindaye-md)
+- [Ding Ding](https://github.com/dding0211)
+- [Hui Yao](https://github.com/HuiYao-Amber)
+
+## Repo structure
+- `Proposal/`: Contains the project proposal document outlining objectives, methodology, and expected outcomes.
+- `Analytical_pipeline/`: Contains scripts and notebooks for data cleaning, transformation, and analysis.
+    - `1_data_cleaning/`: Scripts for cleaning raw datasets.
+    - `1.1_exploratory_analysis`: Notebooks for initial data exploration and visualization.
+    - `2_ML`: Scripts for machine learning models applied to the data attempting to predict funding amount based on historical data.
+    - `3_text_analysis_files/`: Scripts for text analysis on research topics and abstracts.
+- `Draft_dashboard/`: Contains the code for the draft code for individual tabs of the dashboard.
+- `Final_dashboard/`: Contains the final version of the interactive dashboard code.
+    - `data/`: Contains cleaned datasets used in the dashboard.
+- `Final_write_up/`: Contains the final project report summarizing findings and insights.
+
+## Link to the deployed dashboard
+The interactive dashboard can be accessed [here](https://loyuchang.shinyapps.io/show_me_the_money/).

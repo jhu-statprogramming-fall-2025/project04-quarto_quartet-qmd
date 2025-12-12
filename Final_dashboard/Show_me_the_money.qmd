@@ -475,7 +475,7 @@ output$intro_count_plot <- renderPlot({
 ::: {.card title="Funding Data Summary"}
 
 This dataset compiles all NIH and NSF award records from 2021 through December 1, 2025. It includes key information such as project titles, funding amounts, award dates, and participating institutions. For transparency and reproducibility, our raw data and scripts are available in our project's GitHub repository.
-GitHub Repository: [View Project Repository](https://github.com/lindaye-md/jhu-biostat777-project-4.git)
+GitHub Repository: [View Project Repository](https://github.com/jhu-statprogramming-fall-2025/project04-quarto_quartet-qmd)
 
 :::
 
