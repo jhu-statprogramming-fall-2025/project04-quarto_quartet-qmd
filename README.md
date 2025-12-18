@@ -5,7 +5,7 @@ This repo contains the project proposal, exploratory data analysis, and all sour
 
 Our goal is to provide a clear and accessible resource that helps students, researchers, and institutions identify trends in funding by state, year, funding agency, and research topic, supporting a better understanding of current funding patterns.
 
-### Team Members
+## Team Members
 This project is created and maintained by:
 - [Lo-Yu Chang](https://github.com/loyuchang)
 - [Linda Ye](https://github.com/lindaye-md)
@@ -26,3 +26,10 @@ This project is created and maintained by:
 
 ## Link to the deployed dashboard
 The interactive dashboard can be accessed [here](https://loyuchang.shinyapps.io/show_me_the_money/).
+
+## Baisc introduction to the dashboard
+The dashboard consists of four main tabs:
+- `Introduction`: Provides an overview of the project, its objectives, and the data dictionary.
+- `Funding Breakdown`: Visualizes funding trends over time, by state, and by agency.
+- `Interactive Heatmap`: Allows users to explore funding distribution across states, years, grant types, and agencies.
+- `Text Analysis`: Presents insights from text analysis of research topics and abstracts.
