@@ -27,7 +27,7 @@ This project is created and maintained by:
 ## Link to the deployed dashboard
 The interactive dashboard can be accessed [here](https://loyuchang.shinyapps.io/show_me_the_money/).
 
-## Baisc introduction to the dashboard
+## Basic introduction to the dashboard
 The dashboard consists of four main tabs:
 - `Introduction`: Provides an overview of the project, its objectives, and the data dictionary.
 - `Funding Breakdown`: Visualizes funding trends over time, by state, and by agency.
