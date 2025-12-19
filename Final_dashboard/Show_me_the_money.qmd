@@ -856,7 +856,7 @@ kable(
 # 1. Y Axis Selection
 allowed_y <- c("Organization_state", "Funding_organization", "Activity", "Activity Category")
 y_choices <- intersect(allowed_y, names(merged_data))
-selectInput('y_var', 'Y axis column', choices = c('State' = 'Organization_state',
+selectInput('y_var', 'X axis column', choices = c('State' = 'Organization_state',
                                                   'Organization' = 'Funding_organization',
                                                   'Grant subtypes' = 'Activity',
                                                   'Grant types' = 'Activity Category'),selected = 'Organization_state')
