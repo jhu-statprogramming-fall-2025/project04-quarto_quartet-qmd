@@ -15,7 +15,7 @@ This project is created and maintained by:
 ## Repo structure
 - `Proposal/`: Contains the project proposal document outlining objectives, methodology, and expected outcomes.
 - `Analytical_pipeline/`: Contains scripts and notebooks for data cleaning, transformation, and analysis.
-    - `1_data_cleaning/`: Scripts for cleaning raw datasets.
+    - `1_data_cleaning/`: Scripts for cleaning raw datasets. Part of the raw data can be found in [here](https://drive.google.com/drive/folders/1jD7aWVwk_U4ekBQCSTjx3RjZw6K6dV7V)
     - `1.1_exploratory_analysis`: Notebooks for initial data exploration and visualization.
     - `2_ML`: Scripts for machine learning models applied to the data attempting to predict funding amount based on historical data.
     - `3_text_analysis_files/`: Scripts for text analysis on research topics and abstracts.
