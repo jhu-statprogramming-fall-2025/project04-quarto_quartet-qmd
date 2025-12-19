@@ -8,6 +8,9 @@ library(tidyverse)
 library(here)
 ```
 
+# Note
+Due to the large size of the raw data files from NIH RePORTER, the combined raw data is saved in a seperate Google Drive folder to avoid bloating the GitHub repository. Please download raw files from [this link](https://drive.google.com/drive/folders/1yXcOL0Kl7UDMljaD_2O-Ss07FjI0UcX6?usp=sharing) before running the code below.
+
 ```{r}
 # load all the files under raw_data/NIH_Search folder
 nih_files <- list.files(here("raw_data/NIH_Search"), full.names = TRUE)
